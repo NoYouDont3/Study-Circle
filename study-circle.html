@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Study Circle</title>
-<meta name="theme-color" content="#ff4400">
+<meta name="theme-color" content="#101010">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Study Circle">
@@ -45,7 +45,7 @@
     isolation: isolate;
   }
 
-  /* Blend the iPhone safe-area/status-bar strip into the same background as the rest of the page. */
+  /* Keep the iPhone safe-area/status-bar strip dark while the game stays orange below it. */
   body::before {
     content: '';
     position: fixed;
@@ -54,7 +54,7 @@
     left: 0;
     right: 0;
     height: env(safe-area-inset-top, 0px);
-    background: linear-gradient(160deg, var(--grad-a) 0%, var(--grad-b) 100%);
+    background: #101010;
     pointer-events: none;
   }
 
@@ -1480,7 +1480,7 @@
     /* ===== CURRENT SEASON =====
        Change this one number when you publish a new Battle Pass. Players keep
        every unlocked perk, but their level and XP reset when it changes. */
-    const CURRENT_SEASON = 2;
+    const CURRENT_SEASON = 1;
     window.CURRENT_SEASON = CURRENT_SEASON;
 
     /* Separate localStorage records: season, level/XP progress, permanent perks,
