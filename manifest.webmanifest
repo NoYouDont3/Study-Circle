@@ -1,0 +1,23 @@
+{
+  "id": "./study-circle.html",
+  "name": "Study Circle",
+  "short_name": "Study Circle",
+  "description": "Study Circle's turkey-clicking game, battle pass, perks, and schedules.",
+  "start_url": "./study-circle.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ff8f2d",
+  "theme_color": "#ff5a18",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

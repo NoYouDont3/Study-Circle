@@ -1,0 +1,91 @@
+﻿{"frames": {
+
+"battlepass10000":
+{
+	"frame": {"x":0,"y":0,"w":240,"h":172},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":240,"h":172},
+	"sourceSize": {"w":240,"h":172}
+},
+"battlepass20000":
+{
+	"frame": {"x":240,"y":0,"w":240,"h":172},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":240,"h":172},
+	"sourceSize": {"w":240,"h":172}
+},
+"flex10000":
+{
+	"frame": {"x":480,"y":0,"w":326,"h":233},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":326,"h":233},
+	"sourceSize": {"w":326,"h":233}
+},
+"flex20000":
+{
+	"frame": {"x":806,"y":0,"w":326,"h":233},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":326,"h":233},
+	"sourceSize": {"w":326,"h":233}
+},
+"home10000":
+{
+	"frame": {"x":1132,"y":0,"w":257,"h":282},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":257,"h":282},
+	"sourceSize": {"w":257,"h":282}
+},
+"home20000":
+{
+	"frame": {"x":1389,"y":0,"w":257,"h":282},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":257,"h":282},
+	"sourceSize": {"w":257,"h":282}
+},
+"inbox10000":
+{
+	"frame": {"x":1646,"y":0,"w":225,"h":215},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":215},
+	"sourceSize": {"w":225,"h":215}
+},
+"inbox20000":
+{
+	"frame": {"x":1871,"y":0,"w":225,"h":215},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":215},
+	"sourceSize": {"w":225,"h":215}
+},
+"lunch10000":
+{
+	"frame": {"x":0,"y":282,"w":345,"h":140},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":345,"h":140},
+	"sourceSize": {"w":345,"h":140}
+},
+"lunch20000":
+{
+	"frame": {"x":345,"y":282,"w":345,"h":140},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":345,"h":140},
+	"sourceSize": {"w":345,"h":140}
+}},
+"meta": {
+	"app": "Adobe Animate",
+	"version": "24.0.15.5",
+	"image": "icons.png",
+	"format": "RGBA8888",
+	"size": {"w":2180,"h":1051},
+	"scale": "1"
+}
+}
