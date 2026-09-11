@@ -388,7 +388,7 @@
     transform: translateX(-50%);
     width: 100%;
     max-width: 480px;
-    z-index: 30;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -824,8 +824,6 @@
   }
 
   .perk-card:disabled { cursor: default; opacity: 0.72; }
-  body.energy-depleted .perk-card { filter: grayscale(1); opacity: .42; cursor: not-allowed; }
-  body.energy-depleted .active-perk, body.energy-depleted .perk-gain { animation: none !important; filter: grayscale(1); opacity: .42; }
   .perk-card.active { border-color: #ffeb55; box-shadow: inset 0 0 0 2px #ffeb55, 0 0 13px rgba(255, 235, 85, 0.55); }
   .perk-card img { width: 92px; height: 92px; object-fit: contain; display: block; margin: 0 auto 6px; }
   .perk-card-name { display: block; font-size: 17px; line-height: 0.95; }
@@ -952,13 +950,12 @@
     font-family: 'Bakbak One', sans-serif;
     font-size: 13px;
     letter-spacing: 0.5px;
-    position: relative;
   }
 
   .xp-bar-label .xp-level {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.75);
-    font-family: 'Bakbak One', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
   }
 
@@ -974,41 +971,10 @@
   .xp-bar-fill {
     height: 100%;
     width: 0%;
-    background: #47ff75;
+    background: #22c55e;
     border-radius: 0;
-    box-shadow: 0 0 10px rgba(71,255,117,.9), inset 0 0 5px rgba(255,255,255,.45);
-    transition: width 220ms cubic-bezier(.2,.8,.25,1);
+    transition: width 0.25s ease;
   }
-
-  .energy-bar-fill { background: #ffe44d; box-shadow: 0 0 10px rgba(255,228,77,.9), inset 0 0 5px rgba(255,255,255,.45); }
-  .turkey-energy-warning { position:absolute; z-index:10; left:50%; top:50%; transform:translate(-50%,-50%); display:none; width:90%; color:#ffe44d; font-family:'Bakbak One',sans-serif; font-size:clamp(24px,7vw,42px); letter-spacing:2px; text-align:center; text-shadow:0 3px 10px #000,0 0 16px #000; pointer-events:none; }
-  body.energy-depleted .turkey-energy-warning { display:block; }
-
-  .xp-level-up-flash { position:absolute; left:50%; top:-5px; transform:translateX(-50%); color:#46ff75; font-family:'Bakbak One',sans-serif; font-size:17px; letter-spacing:1px; opacity:0; pointer-events:none; text-shadow:0 0 10px rgba(70,255,117,.9); white-space:nowrap; }
-  @keyframes compactLevelUp { 0% { opacity:0; transform:translate(-50%,8px) scale(.7); } 20% { opacity:1; transform:translate(-50%,-6px) scale(1.08); } 70% { opacity:1; transform:translate(-50%,-12px) scale(1); } 100% { opacity:0; transform:translate(-50%,-22px) scale(.9); } }
-  .xp-level-up-flash.show { animation:compactLevelUp 900ms ease-out forwards; }
-  .cps-wrap { position:relative; min-height:38px; overflow:hidden; text-align:center; font-family:'Bakbak One',sans-serif; padding:2px 0; }
-  .cps-counter { color:#fff; font-size:17px; letter-spacing:1px; position:relative; z-index:1; }
-  .cps-message { min-height:14px; color:#fff; font-size:11px; letter-spacing:1.5px; opacity:0; position:relative; z-index:1; }
-  .cps-wrap.cps-tick .cps-counter { animation:cpsTick 260ms cubic-bezier(.18,.9,.3,1); }
-  .cps-wrap.speeding { animation:cpsSpeedSurge 720ms cubic-bezier(.18,.82,.25,1) forwards, cpsRedFade 1.4s ease-out forwards; }
-  .cps-wrap.speeding .cps-counter { animation:cpsRedFade 1.4s ease-out forwards; }
-  .cps-wrap.speeding .cps-message { animation:cpsMessage 1.3s ease-out forwards; }
-  .cps-wrap.speeding::before, .cps-wrap.speeding::after { content:""; position:absolute; inset:5px -40%; background:repeating-linear-gradient(90deg, transparent 0 14px, rgba(255,255,255,.9) 15px 34px, transparent 35px 55px); animation:speedLines 220ms linear 7; opacity:.75; }
-  .cps-wrap.slowing { animation:cpsSlowRumble 360ms ease-in-out 3, cpsBlueFade 1.5s ease-out forwards; }
-  .cps-wrap.slowing .cps-counter { animation:cpsBlueFade 1.5s ease-out forwards; }
-  .cps-wrap.recent-speed .cps-counter { color:#631818; }
-  .cps-wrap.recent-slow .cps-counter { color:#162d61; }
-  .cps-wrap.holy .cps-message { color:#fff; background:#000; animation:holyCow 140ms steps(2) 8, cpsMessage 1.3s ease-out forwards; }
-  @keyframes cpsRumble { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-3px); } 75% { transform:translateX(3px); } }
-  @keyframes cpsSpeedSurge { 0% { transform:scale(1); } 22% { transform:scale(1.1); } 58% { transform:scale(1.035); } 100% { transform:scale(1); } }
-  @keyframes cpsSlowRumble { 0%,100% { transform:translateX(0); } 50% { transform:translateX(2px); } }
-  @keyframes cpsRedFade { 0%,65% { color:#ff4747; } 100% { color:#631818; } }
-  @keyframes cpsBlueFade { 0%,65% { color:#56a5ff; } 100% { color:#162d61; } }
-  @keyframes cpsMessage { 0%,70% { opacity:1; transform:translateY(0); } 100% { opacity:0; transform:translateY(-5px); } }
-  @keyframes speedLines { from { transform:translateX(-24%); } to { transform:translateX(24%); } }
-  @keyframes holyCow { 0%,100% { color:#fff; background:#000; } 50% { color:#000; background:#fff; } }
-  @keyframes cpsTick { 0% { transform:scale(1); } 45% { transform:scale(1.22); color:#ffe44d; } 100% { transform:scale(1); } }
 
   @keyframes turkeyJump {
     0%, 100% { transform: translateY(0) scale(1); }
@@ -1068,7 +1034,7 @@
     max-width: 480px;
     margin: 0 auto;
     pointer-events: none;
-    z-index: 10;
+    z-index: 30;
     overflow: hidden;
   }
 
@@ -1092,46 +1058,9 @@
   .xp-ball.launch {
     animation: xpBallLaunch 1.6s ease-out forwards;
   }
-
-  /* ---------- B.E.E.Z + desktop game layout ---------- */
-  .beez-panel { display: none; }
-  .beez-button { width: 100%; margin-top: 4px; padding: 11px 16px; border: 2px solid #ffffff; border-radius: 0; background: #101010; color: #3dff6e; font-family: 'Bakbak One', sans-serif; font-size: 18px; letter-spacing: 2px; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
-  .beez-modal { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 18px; background: rgba(0, 0, 0, 0.72); opacity: 0; visibility: hidden; transition: opacity 180ms ease, visibility 180ms ease; }
-  .beez-modal.open { opacity: 1; visibility: visible; }
-  .beez-modal-card { position: relative; width: min(100%, 640px); aspect-ratio: 4 / 3; }
-  .beez-modal iframe, .beez-panel iframe { width: 100%; height: 100%; border: 0; display: block; }
-  .beez-close { position: absolute; z-index: 1; top: -12px; right: -8px; width: 36px; height: 36px; border: 2px solid #3dff6e; border-radius: 50%; background: #101010; color: #ffffff; font-size: 24px; line-height: 1; cursor: pointer; }
-  @keyframes rebirthShake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-7px) rotate(-1deg); } 75% { transform: translateX(7px) rotate(1deg); } }
-  @keyframes rebirthWhite { 0%, 6%, 12% { filter: brightness(1); } 3%, 9% { filter: brightness(4) grayscale(1); } 16%, 82% { filter: brightness(0) invert(1) grayscale(1); } 100% { filter: brightness(1); } }
-  .turkey-canvas-box.rebirthing, .xp-bar-wrap.rebirthing { animation: rebirthShake 105ms linear 11; }
-  .turkey-canvas-box.rebirth-white canvas { animation: rebirthWhite 6.2s ease-in-out forwards; }
-
-  @media (min-width: 900px) {
-    body { max-width: none; min-height: 100vh; }
-    header { width: min(760px, calc(100vw - 1040px)); min-width: 620px; margin-left: auto; margin-right: auto; }
-    #homeMain { width: min(760px, calc(100vw - 1040px)); min-width: 620px; margin-left: auto; margin-right: auto; }
-    #homeMain .turkey-canvas-box, #homeMain .turkey-effect-layer { max-width: 720px; height: min(70vh, 680px); min-height: 460px; }
-    .circle-field, .xp-burst-layer { max-width: none; }
-    .tab-bar { max-width: none; padding-left: max(24px, calc((100vw - 1200px) / 2)); padding-right: max(24px, calc((100vw - 1200px) / 2)); }
-    .flex-panel, .inbox-panel, .battlepass-panel { left: 0; right: 0; transform: none; width: 100%; max-width: none; margin: 0; padding-left: max(32px, calc((100vw - 1200px) / 2)); padding-right: max(32px, calc((100vw - 1200px) / 2)); }
-    .flex-panel-header { padding-top: 38px; }
-    .flex-panel-title { font-size: 42px; }
-    .flex-list, .lunch-list { width: min(100%, 1200px); align-self: center; }
-    .flex-row { padding: 24px 28px; }
-    .battlepass-title { font-size: 54px; }
-    .reward-track { width: min(100%, 1200px); }
-    .beez-panel { position: fixed; z-index: 20; top: 50%; left: 16px; transform: translateY(-50%); display: block; width: min(680px, calc(50vw - 220px)); aspect-ratio: 4 / 3; height: auto; max-height: calc(100vh - 48px); overflow: hidden; border: 2px solid rgba(61, 255, 110, 0.65); border-radius: 16px; background: #010401; box-shadow: 0 14px 36px rgba(0, 0, 0, 0.34); }
-    .perks-panel { position: fixed; z-index: 20; top: 24px; right: 16px; bottom: 24px; display: block !important; width: min(540px, calc(50vw - 160px)); max-width: none; margin: 0; padding: 0 12px 16px; overflow-y: auto; background: rgba(27, 27, 27, 0.32); border: 1px solid rgba(255, 255, 255, 0.28); box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22); }
-    .perks-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
-    .perk-card { min-height: 124px; }
-    .perk-card img { width: 70px; height: 70px; }
-    .beez-button, .beez-modal { display: none !important; }
-    body:not(.home-tab-active) .beez-panel,
-    body:not(.home-tab-active) .perks-panel { display: none !important; }
-  }
 </style>
 </head>
-<body class="home-tab-active">
+<body>
 
   <div class="circle-field" aria-hidden="true">
     <div class="float-circle fc1"></div>
@@ -1161,12 +1090,6 @@
       <h1 class="whats-new-title" id="whatsNewTitle">WHAT DID I MISS DAWG?</h1>
 
       <div class="whats-new-section">
-        <h2 class="whats-new-section-title">BEEZ UPDATE!!!!!!</h2>
-        <p class="whats-new-copy">NEW ENERGY SYSTEM, REBIRTH SYSTEM AND B.E.E.Z. YOUR ALL IN ONE UPGRADE SYSTEM AHHHHHH I LOVE YOU BEEZ</p>
-        <p class="whats-new-copy">follow maus on tt</p>
-      </div>
-
-      <div class="whats-new-section">
         <h2 class="whats-new-section-title">Season 1 update</h2>
         <p class="whats-new-copy">Welcome to gobble glitch, season 1s theme!</p>
         <p class="whats-new-copy">A new entire clicking game with battle pass has been intergrated! You can earn battle pass perks from getting a getting a higher level! Then you can equip those perks to get your level even higher! Keep collecting rare season themed perks before the end of the season and keep leveling up! You keep all perks earned throughout each season. Dont miss out gang</p>
@@ -1189,21 +1112,16 @@
   <main id="homeMain">
     <div class="turkey-wrap">
       <div class="turkey-effect-layer" id="turkeyEffectLayer" aria-hidden="true"></div>
-      <div class="turkey-canvas-box" id="turkeyBox" aria-label="Tap the turkey to earn XP" role="button"><span class="turkey-energy-warning">OUT OF ENERGY</span></div>
+      <div class="turkey-canvas-box" id="turkeyBox" aria-label="Tap the turkey to earn XP" role="button"></div>
 
       <div class="xp-bar-wrap">
         <div class="xp-bar-label">
           <span class="xp-level">XP</span>
           <span id="xpLevelLabel" class="xp-level">Level 1</span>
-          <span id="xpLevelUpFlash" class="xp-level-up-flash" aria-live="polite"></span>
         </div>
         <div class="xp-bar-track">
           <div class="xp-bar-fill" id="xpBarFill"></div>
         </div>
-        <div class="cps-wrap" id="cpsWrap" aria-live="polite"><div class="cps-counter" id="cpsCounter">0 CPS</div><div class="cps-message" id="cpsMessage"></div></div>
-        <div class="xp-bar-label"><span class="xp-level">ENERGY</span><span id="energyLevelLabel" class="xp-level">100%</span></div>
-        <div class="xp-bar-track"><div class="xp-bar-fill energy-bar-fill" id="energyBarFill"></div></div>
-        <button class="beez-button" id="beezButton" type="button" aria-controls="beezModal" aria-expanded="false">B.E.E.Z</button>
       </div>
 
     </div>
@@ -1211,170 +1129,6 @@
 
   <div class="xp-burst-layer" id="xpBurstLayer"></div>
   <div class="level-up-banner" id="levelUpBanner" aria-live="polite"></div>
-
-  <aside class="beez-panel" aria-label="B.E.E.Z 4000">
-    <iframe src="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04Ij4KPHRpdGxlPkIuRS5FLlogNDAwMDwvdGl0bGU+CjxzdHlsZT4KICAgdXJsKCJodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PUJha2JhaytPbmUmZGlzcGxheT1zd2FwIik7CiAgOnJvb3QgewogICAgLS1ncmVlbjogIzNkZmY2ZTsKICAgIC0tZ3JlZW4tZGltOiAjMWM3YTM0OwogICAgLS1ncmVlbi1nbG93OiByZ2JhKDYxLCAyNTUsIDExMCwgMC41NSk7CiAgICAtLWJnLWJsYWNrOiAjMDEwNDAxOwogIH0KCiAgKiB7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IH0KCiAgaHRtbCwgYm9keSB7CiAgICBtYXJnaW46IDA7CiAgICBwYWRkaW5nOiAwOwogICAgaGVpZ2h0OiAxMDAlOwogICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7CiAgICBmb250LWZhbWlseTogQXJpYWwsIHNhbnMtc2VyaWY7CiAgICBkaXNwbGF5OiBmbGV4OwogICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgIGp1c3RpZnktY29udGVudDogY2VudGVyOwogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9CgogIEBmb250LWZhY2UgewogICAgZm9udC1mYW1pbHk6ICdTaGFyZSBUZWNoIE1vbm8nOwogICAgc3JjOiBsb2NhbCgnU2hhcmUgVGVjaCBNb25vJyk7CiAgfQoKICAuZGV2aWNlIHsKICAgIHdpZHRoOiBtaW4oNjQwcHgsIDEwMHZ3KTsKICAgIGFzcGVjdC1yYXRpbzogNCAvIDM7CiAgICBoZWlnaHQ6IGF1dG87CiAgICBiYWNrZ3JvdW5kOiAjMGEwYTBhOwogICAgYm9yZGVyLXJhZGl1czogMThweDsKICAgIHBhZGRpbmc6IDE0cHg7CiAgICBib3gtc2hhZG93OgogICAgICBpbnNldCAwIDAgMTJweCAjMDAwLAogICAgICAwIDAgNDBweCByZ2JhKDAsMCwwLDAuOCk7CiAgfQoKICAuc2NyZWVuLWZyYW1lIHsKICAgIHBvc2l0aW9uOiByZWxhdGl2ZTsKICAgIHdpZHRoOiAxMDAlOwogICAgaGVpZ2h0OiAxMDAlOwogICAgYm9yZGVyLXJhZGl1czogMTBweDsKICAgIGJhY2tncm91bmQ6IHZhcigtLWJnLWJsYWNrKTsKICAgIG92ZXJmbG93OiBoaWRkZW47CiAgICBib3gtc2hhZG93OgogICAgICBpbnNldCAwIDAgNjBweCAxMHB4IHJnYmEoMCwwLDAsMC45KSwKICAgICAgaW5zZXQgMCAwIDRweCAjMDAwOwogICAgLyogYmFycmVsIGRpc3RvcnRpb24gdmlhIGJvcmRlci1yYWRpdXMgdHJpY2sgKyB0cmFuc2Zvcm0gb24gaW5uZXIgY29udGVudCAqLwogIH0KCiAgLyogQ1JUIGN1cnZhdHVyZSBpbGx1c2lvbiAqLwogIC5jcnQtY3VydmUgewogICAgcG9zaXRpb246IGFic29sdXRlOwogICAgaW5zZXQ6IDA7CiAgICBib3JkZXItcmFkaXVzOiAxMHB4OwogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICAgIGZpbHRlcjogbm9uZTsKICB9CgogIC5jcnQtZWRnZS1zaGFkZSB7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBpbnNldDogMDsKICAgIHotaW5kZXg6IDk7CiAgICBwb2ludGVyLWV2ZW50czogbm9uZTsKICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7CiAgICBib3gtc2hhZG93OgogICAgICBpbnNldCAwIDAgNDBweCAxMHB4IHJnYmEoMCwwLDAsMC41NSksCiAgICAgIGluc2V0IDAgMCA5MHB4IDMwcHggcmdiYSgwLDAsMCwwLjM1KTsKICB9CgogIC5jb250ZW50IHsKICAgIHBvc2l0aW9uOiByZWxhdGl2ZTsKICAgIHdpZHRoOiAxMDAlOwogICAgaGVpZ2h0OiAxMDAlOwogICAgY29sb3I6IHZhcigtLWdyZWVuKTsKICAgIHRleHQtc2hhZG93OgogICAgICAwIDAgMnB4IHZhcigtLWdyZWVuLWdsb3cpLAogICAgICAwIDAgNnB4IHZhcigtLWdyZWVuLWdsb3cpLAogICAgICAwIDAgMTJweCByZ2JhKDYxLDI1NSwxMTAsMC4yNSk7CiAgICBmaWx0ZXI6IGJsdXIoMC4yNXB4KTsKICAgIGRpc3BsYXk6IGZsZXg7CiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uOwogIH0KCiAgLyogTG93LXJlcyBmZWVsOiBwaXhlbGF0aW9uIHZpYSBzY2FsZWQtZG93biByZW5kZXJpbmcgKi8KICAucGl4ZWxhdGVkIHsKICAgIGltYWdlLXJlbmRlcmluZzogcGl4ZWxhdGVkOwogIH0KCiAgLyogVGFicyAqLwogIC50YWJzIHsKICAgIGRpc3BsYXk6IGZsZXg7CiAgICBib3JkZXItYm90dG9tOiAycHggc29saWQgdmFyKC0tZ3JlZW4tZGltKTsKICAgIGZsZXgtc2hyaW5rOiAwOwogICAgcGFkZGluZzogNnB4IDZweCAwIDZweDsKICAgIGdhcDogMnB4OwogIH0KCiAgLnRhYiB7CiAgICBmbGV4OiAxOwogICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgcGFkZGluZzogOHB4IDRweCA2cHg7CiAgICBmb250LXNpemU6IDE1cHg7CiAgICBsZXR0ZXItc3BhY2luZzogMnB4OwogICAgY3Vyc29yOiBwb2ludGVyOwogICAgY29sb3I6IHZhcigtLWdyZWVuLWRpbSk7CiAgICBib3JkZXI6IDFweCBzb2xpZCB0cmFuc3BhcmVudDsKICAgIGJvcmRlci1ib3R0b206IG5vbmU7CiAgICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDsKICAgIGZvbnQtZmFtaWx5OiBpbmhlcml0OwogICAgdHJhbnNpdGlvbjogY29sb3IgMC4xczsKICAgIHVzZXItc2VsZWN0OiBub25lOwogIH0KCiAgLnRhYjpob3ZlciB7CiAgICBjb2xvcjogIzdkZmZhMDsKICB9CgogIC50YWIuYWN0aXZlIHsKICAgIGNvbG9yOiB2YXIoLS1ncmVlbik7CiAgICBib3JkZXItY29sb3I6IHZhcigtLWdyZWVuLWRpbSk7CiAgICBiYWNrZ3JvdW5kOiByZ2JhKDYxLDI1NSwxMTAsMC4wNik7CiAgfQoKICAudGFiLmFjdGl2ZTo6YWZ0ZXIgewogICAgY29udGVudDogIiI7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBib3R0b206IC0ycHg7CiAgICBsZWZ0OiAwOwogICAgcmlnaHQ6IDA7CiAgICBoZWlnaHQ6IDJweDsKICAgIGJhY2tncm91bmQ6IHZhcigtLWdyZWVuKTsKICAgIGJveC1zaGFkb3c6IDAgMCA4cHggdmFyKC0tZ3JlZW4tZ2xvdyk7CiAgfQoKICAvKiBQYW5lbCBjb250ZW50ICovCiAgLnBhbmVsIHsKICAgIGZsZXg6IDE7CiAgICBwYWRkaW5nOiAxNnB4IDE4cHg7CiAgICBmb250LXNpemU6IDE0cHg7CiAgICBsaW5lLWhlaWdodDogMS42OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQoKICAucGFuZWwuYWN0aXZlIHsgZGlzcGxheTogYmxvY2s7IH0KCiAgLnBhbmVsIGgxIHsKICAgIGZvbnQtc2l6ZTogMTZweDsKICAgIGxldHRlci1zcGFjaW5nOiAzcHg7CiAgICBtYXJnaW46IDAgMCAxMnB4IDA7CiAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgdmFyKC0tZ3JlZW4tZGltKTsKICAgIHBhZGRpbmctYm90dG9tOiA2cHg7CiAgfQoKICAucm93IHsKICAgIGRpc3BsYXk6IGZsZXg7CiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47CiAgICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkIHJnYmEoNjEsMjU1LDExMCwwLjIpOwogICAgcGFkZGluZzogNHB4IDA7CiAgfQoKICAuYmFyLW91dGVyIHsKICAgIHdpZHRoOiAxMDBweDsKICAgIGhlaWdodDogOHB4OwogICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tZ3JlZW4tZGltKTsKICAgIGRpc3BsYXk6IGlubGluZS1ibG9jazsKICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgfQoKICAuYmFyLWlubmVyIHsKICAgIGhlaWdodDogMTAwJTsKICAgIGJhY2tncm91bmQ6IHZhcigtLWdyZWVuKTsKICAgIGJveC1zaGFkb3c6IDAgMCA2cHggdmFyKC0tZ3JlZW4tZ2xvdyk7CiAgfQoKICB1bC5saXN0IHsgbGlzdC1zdHlsZTogbm9uZTsgbWFyZ2luOiAwOyBwYWRkaW5nOiAwOyB9CiAgdWwubGlzdCBsaSB7CiAgICBwYWRkaW5nOiA1cHggMDsKICAgIGJvcmRlci1ib3R0b206IDFweCBkb3R0ZWQgcmdiYSg2MSwyNTUsMTEwLDAuMTUpOwogICAgY3Vyc29yOiBkZWZhdWx0OwogIH0KICB1bC5saXN0IGxpOmhvdmVyIHsgY29sb3I6ICNmZmZmZmY7IHRleHQtc2hhZG93OiAwIDAgOHB4IHZhcigtLWdyZWVuLWdsb3cpOyB9CgogIC5ibGluayB7IGFuaW1hdGlvbjogYmxpbmsgMS4xcyBzdGVwcygyKSBpbmZpbml0ZTsgfQogIEBrZXlmcmFtZXMgYmxpbmsgeyA1MCUgeyBvcGFjaXR5OiAwOyB9IH0KCiAgLyogU2NhbmxpbmVzICovCiAgLnNjYW5saW5lcyB7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBpbnNldDogMDsKICAgIHBvaW50ZXItZXZlbnRzOiBub25lOwogICAgYmFja2dyb3VuZDogcmVwZWF0aW5nLWxpbmVhci1ncmFkaWVudCgKICAgICAgdG8gYm90dG9tLAogICAgICByZ2JhKDAsMCwwLDApIDBweCwKICAgICAgcmdiYSgwLDAsMCwwKSAxcHgsCiAgICAgIHJnYmEoMCwwLDAsMC4zNSkgMnB4LAogICAgICByZ2JhKDAsMCwwLDAuMzUpIDNweAogICAgKTsKICAgIG1peC1ibGVuZC1tb2RlOiBtdWx0aXBseTsKICAgIHotaW5kZXg6IDU7CiAgfQoKICAvKiBSb2xsaW5nIHNjYW5saW5lIGdsb3cgYmFuZCAqLwogIC5yb2xsIHsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIGxlZnQ6IDA7IHJpZ2h0OiAwOwogICAgaGVpZ2h0OiA0MHB4OwogICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgcmdiYSg2MSwyNTUsMTEwLDApIDAlLCByZ2JhKDYxLDI1NSwxMTAsMC4wNykgNTAlLCByZ2JhKDYxLDI1NSwxMTAsMCkgMTAwJSk7CiAgICBhbmltYXRpb246IHJvbGxtb3ZlIDZzIGxpbmVhciBpbmZpbml0ZTsKICAgIHBvaW50ZXItZXZlbnRzOiBub25lOwogICAgei1pbmRleDogNjsKICB9CiAgQGtleWZyYW1lcyByb2xsbW92ZSB7CiAgICAwJSB7IHRvcDogLTQwcHg7IH0KICAgIDEwMCUgeyB0b3A6IDEwMCU7IH0KICB9CgogIC8qIFZpZ25ldHRlICsgY3VydmF0dXJlIHNoYWRpbmcgKi8KICAudmlnbmV0dGUgewogICAgZGlzcGxheTogbm9uZTsKICB9CgogIC8qIENocm9tYXRpYy1pc2ggZmxpY2tlciAqLwogIC5mbGlja2VyIHsKICAgIGFuaW1hdGlvbjogZmxpY2tlciA0cyBpbmZpbml0ZTsKICB9CiAgQGtleWZyYW1lcyBmbGlja2VyIHsKICAgIDAlLCA5NiUsIDEwMCUgeyBvcGFjaXR5OiAxOyB9CiAgICA5NyUgeyBvcGFjaXR5OiAwLjg1OyB9CiAgICA5OCUgeyBvcGFjaXR5OiAwLjk1OyB9CiAgfQoKICAvKiBOb2lzZSB0ZXh0dXJlICovCiAgLm5vaXNlIHsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIGluc2V0OiAwOwogICAgei1pbmRleDogNDsKICAgIG9wYWNpdHk6IDAuMDU7CiAgICBwb2ludGVyLWV2ZW50czogbm9uZTsKICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybCgiZGF0YTppbWFnZS9zdmcreG1sO3V0ZjgsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC45JyBudW1PY3RhdmVzPScyJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUyNScgaGVpZ2h0PScxMDAlMjUnIGZpbHRlcj0ndXJsKCUyM24pJy8+PC9zdmc+Iik7CiAgfQoKICAuZ2xhc3MtcmVmbGVjdGlvbiB7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBpbnNldDogMDsKICAgIHotaW5kZXg6IDg7CiAgICBwb2ludGVyLWV2ZW50czogbm9uZTsKICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxMjBkZWcsIHJnYmEoMjU1LDI1NSwyNTUsMC4wNSkgMCUsIHJnYmEoMjU1LDI1NSwyNTUsMCkgMzAlKTsKICB9CgogIC5mb290ZXIgewogICAgZmxleC1zaHJpbms6IDA7CiAgICBmb250LXNpemU6IDExcHg7CiAgICBwYWRkaW5nOiA0cHggMTBweDsKICAgIGNvbG9yOiB2YXIoLS1ncmVlbi1kaW0pOwogICAgYm9yZGVyLXRvcDogMXB4IHNvbGlkIHZhcigtLWdyZWVuLWRpbSk7CiAgICBkaXNwbGF5OiBmbGV4OwogICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOwogIH0KCiAgc21hbGwgeyBjb2xvcjogdmFyKC0tZ3JlZW4tZGltKTsgfQogIC50YWJzLCAudGFiLCAucGFuZWwgaDEgeyBmb250LWZhbWlseTogJ0Jha2JhayBPbmUnLCBzYW5zLXNlcmlmOyB9CiAgLnNjcmVlbi1mcmFtZSB7IGJveC1zaGFkb3c6IG5vbmU7IH0KICAuY3J0LWVkZ2Utc2hhZGUsIC5zY2FubGluZXMsIC5yb2xsLCAubm9pc2UsIC5nbGFzcy1yZWZsZWN0aW9uIHsgZGlzcGxheTogbm9uZSAhaW1wb3J0YW50OyB9CiAgLmNvbnRlbnQsIC5jb250ZW50ICosIC50YWJzLCAudGFiLCAucGFuZWwsIC5wYW5lbCAqLCAuZm9vdGVyLCAuZm9vdGVyICogeyBjb2xvcjogcmdiKDYxLCAyNTUsIDExMCkgIWltcG9ydGFudDsgdGV4dC1zaGFkb3c6IDAgMCA1cHggcmdiYSg2MSwgMjU1LCAxMTAsIDAuNDUpOyB9Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+Cgo8c3ZnIHdpZHRoPSIwIiBoZWlnaHQ9IjAiIHN0eWxlPSJwb3NpdGlvbjphYnNvbHV0ZSI+CiAgPGZpbHRlciBpZD0iY3J0QnVsZ2UiPgogICAgPGZlSW1hZ2UgcmVzdWx0PSJtYXAiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2Uvc3ZnK3htbDt1dGY4LCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJyUzRSUzQ3JhZGlhbEdyYWRpZW50IGlkPSdnJyBjeD0nNTAlMjUnIGN5PSc1MCUyNScgcj0nNzUlMjUnJTNFJTNDc3RvcCBvZmZzZXQ9JzAlMjUnIHN0b3AtY29sb3I9JyUyMzgwODA4MCcvJTNFJTNDc3RvcCBvZmZzZXQ9JzEwMCUyNScgc3RvcC1jb2xvcj0nJTIzZmZmZmZmJy8lM0UlM0MvcmFkaWFsR3JhZGllbnQlM0UlM0NyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJyBmaWxsPSd1cmwoJTIzZyknLyUzRSUzQy9zdmclM0UiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz4KICAgIDxmZURpc3BsYWNlbWVudE1hcCBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJtYXAiIHNjYWxlPSIyNiIgeENoYW5uZWxTZWxlY3Rvcj0iUiIgeUNoYW5uZWxTZWxlY3Rvcj0iUiIvPgogIDwvZmlsdGVyPgo8L3N2Zz4KCjxkaXYgY2xhc3M9ImRldmljZSI+CiAgPGRpdiBjbGFzcz0ic2NyZWVuLWZyYW1lIGZsaWNrZXIiPgogICAgPGRpdiBjbGFzcz0iY3J0LWN1cnZlIj4KICAgICAgPGRpdiBjbGFzcz0iY29udGVudCIgaWQ9ImNvbnRlbnQiPgogICAgICAgIDxkaXYgY2xhc3M9InRhYnMiIGlkPSJ0YWJzIj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiBhY3RpdmUiIGRhdGEtcGFuZWw9InN0YXQiPlNUQVQ8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0idXBnIj5VUEc8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0iaW52Ij5JTlY8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0icmViIj5SRUI8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0idW5pIj5VTkk8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0idHJtIj5UUk08L2Rpdj4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGRpdiBjbGFzcz0icGFuZWwgYWN0aXZlIiBpZD0ic3RhdCI+CiAgICAgICAgICA8aDE+VklUQUxTIC8vIFVOSVQtMDE8L2gxPgogICAgICAgICAgPGRpdiBjbGFzcz0icm93Ij48c3Bhbj5IRUFMVEg8L3NwYW4+PHNwYW4gY2xhc3M9ImJhci1vdXRlciI+PHNwYW4gY2xhc3M9ImJhci1pbm5lciIgc3R5bGU9IndpZHRoOjgyJSI+PC9zcGFuPjwvc3Bhbj48L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+RU5FUkdZPC9zcGFuPjxzcGFuIGNsYXNzPSJiYXItb3V0ZXIiPjxzcGFuIGNsYXNzPSJiYXItaW5uZXIiIHN0eWxlPSJ3aWR0aDo2NCUiPjwvc3Bhbj48L3NwYW4+PC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJyb3ciPjxzcGFuPlJBRCBMVkw8L3NwYW4+PHNwYW4gY2xhc3M9ImJhci1vdXRlciI+PHNwYW4gY2xhc3M9ImJhci1pbm5lciIgc3R5bGU9IndpZHRoOjEyJSI+PC9zcGFuPjwvc3Bhbj48L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+SFlEUkFUSU9OPC9zcGFuPjxzcGFuIGNsYXNzPSJiYXItb3V0ZXIiPjxzcGFuIGNsYXNzPSJiYXItaW5uZXIiIHN0eWxlPSJ3aWR0aDo0NyUiPjwvc3Bhbj48L3NwYW4+PC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJyb3ciPjxzcGFuPkxPQ0FUSU9OPC9zcGFuPjxzcGFuPlNFQ1RPUiA3IC0gU1VCTEVWRUwgMjwvc3Bhbj48L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+VElNRSBFTEFQU0VEPC9zcGFuPjxzcGFuPjAxNDoyMjowNzwvc3Bhbj48L2Rpdj4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGRpdiBjbGFzcz0icGFuZWwiIGlkPSJ1cGciPgogICAgICAgICAgPGgxPlVQR1JBREVTPC9oMT4KICAgICAgICAgIDx1bCBjbGFzcz0ibGlzdCI+CiAgICAgICAgICAgIDxsaT4mZ3Q7IFNFUlZPIFBMQVRJTkcgTUsuSUkgLi4uLi4uLi4uLi4uLi4uLiBJTlNUQUxMRUQ8L2xpPgogICAgICAgICAgICA8bGk+Jmd0OyBPUFRJQyBGSUxURVIgKE5JR0hUKSAuLi4uLi4uLi4uLi4uLi4uIElOU1RBTExFRDwvbGk+CiAgICAgICAgICAgIDxsaT4mZ3Q7IFJBRCBTSElFTERJTkcgLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gTE9DS0VEPC9saT4KICAgICAgICAgICAgPGxpPiZndDsgQVVYIEJBVFRFUlkgQ0VMTCAuLi4uLi4uLi4uLi4uLi4uLi4uLiBBVkFJTEFCTEU8L2xpPgogICAgICAgICAgICA8bGk+Jmd0OyBWT0lDRSBNT0RVTEUgVjMgLi4uLi4uLi4uLi4uLi4uLi4uLi4uIEFWQUlMQUJMRTwvbGk+CiAgICAgICAgICA8L3VsPgogICAgICAgIDwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJwYW5lbCIgaWQ9ImludiI+CiAgICAgICAgICA8aDE+SU5WRU5UT1JZPC9oMT4KICAgICAgICAgIDx1bCBjbGFzcz0ibGlzdCI+CiAgICAgICAgICAgIDxsaT5TVElNUEFLLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi54MDM8L2xpPgogICAgICAgICAgICA8bGk+UlVTVEVEIEdFQVIuLi4uLi4uLi4uLi4uLi4uLi4uLngwNzwvbGk+CiAgICAgICAgICAgIDxsaT5QVVJJRklFRCBXQVRFUi4uLi4uLi4uLi4uLi4uLi4ueDAyPC9saT4KICAgICAgICAgICAgPGxpPlNDUkFQIENJUkNVSVQuLi4uLi4uLi4uLi4uLi4uLi4ueDExPC9saT4KICAgICAgICAgICAgPGxpPkRVQ1QgVEFQRS4uLi4uLi4uLi4uLi4uLi4uLi4uLi54MDE8L2xpPgogICAgICAgICAgPC91bD4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGRpdiBjbGFzcz0icGFuZWwiIGlkPSJyZWIiPgogICAgICAgICAgPGgxPlJBRElPIC8gQkVBQ09OPC9oMT4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+RlJFUTwvc3Bhbj48c3Bhbj4xMDEuNCBNSHo8L3NwYW4+PC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJyb3ciPjxzcGFuPlNJR05BTDwvc3Bhbj48c3BhbiBjbGFzcz0iYmFyLW91dGVyIj48c3BhbiBjbGFzcz0iYmFyLWlubmVyIiBzdHlsZT0id2lkdGg6MzglIj48L3NwYW4+PC9zcGFuPjwvZGl2PgogICAgICAgICAgPHAgc3R5bGU9Im1hcmdpbi10b3A6MTRweDsiPlNDQU5OSU5HIEZPUiBCUk9BRENBU1Q8c3BhbiBjbGFzcz0iYmxpbmsiPl88L3NwYW4+PC9wPgogICAgICAgIDwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJwYW5lbCIgaWQ9InVuaSI+CiAgICAgICAgICA8aDE+VU5JVCBJTkZPPC9oMT4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+TU9ERUw8L3NwYW4+PHNwYW4+Qi5FLkUuWiA0MDAwPC9zcGFuPjwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0icm93Ij48c3Bhbj5GSVJNV0FSRTwvc3Bhbj48c3Bhbj52MS4wMy43PC9zcGFuPjwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0icm93Ij48c3Bhbj5TRVJJQUw8L3NwYW4+PHNwYW4+QlotNDQxOS1YUjwvc3Bhbj48L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+T1dORVI8L3NwYW4+PHNwYW4+VU5SRUdJU1RFUkVEPC9zcGFuPjwvZGl2PgogICAgICAgIDwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJwYW5lbCIgaWQ9InRybSI+CiAgICAgICAgICA8aDE+VEVSTUlOQUw8L2gxPgogICAgICAgICAgPHA+Jmd0OyBBV0FJVElORyBJTlBVVDxzcGFuIGNsYXNzPSJibGluayI+Xzwvc3Bhbj48L3A+CiAgICAgICAgPC9kaXY+CgogICAgICAgIDxkaXYgY2xhc3M9ImZvb3RlciI+CiAgICAgICAgICA8c3BhbiBpZD0iY2xvY2siPjAwOjAwOjAwPC9zcGFuPgogICAgICAgICAgPHNwYW4+Qi5FLkUuWiA0MDAwIC8vIE9OTElORTwvc3Bhbj4KICAgICAgICA8L2Rpdj4KICAgICAgPC9kaXY+CgogICAgICA8ZGl2IGNsYXNzPSJub2lzZSI+PC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9InJvbGwiPjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJzY2FubGluZXMiPjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJnbGFzcy1yZWZsZWN0aW9uIj48L2Rpdj4KICAgIDwvZGl2PgogICAgPGRpdiBjbGFzcz0iY3J0LWVkZ2Utc2hhZGUiPjwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KCjxzY3JpcHQ+CiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnRhYicpLmZvckVhY2godGFiID0+IHsKICAgIHRhYi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsICgpID0+IHsKICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnRhYicpLmZvckVhY2godCA9PiB0LmNsYXNzTGlzdC5yZW1vdmUoJ2FjdGl2ZScpKTsKICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnBhbmVsJykuZm9yRWFjaChwID0+IHAuY2xhc3NMaXN0LnJlbW92ZSgnYWN0aXZlJykpOwogICAgICB0YWIuY2xhc3NMaXN0LmFkZCgnYWN0aXZlJyk7CiAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKHRhYi5kYXRhc2V0LnBhbmVsKS5jbGFzc0xpc3QuYWRkKCdhY3RpdmUnKTsKICAgIH0pOwogIH0pOwoKICBmdW5jdGlvbiB0aWNrKCkgewogICAgY29uc3QgZCA9IG5ldyBEYXRlKCk7CiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnY2xvY2snKS50ZXh0Q29udGVudCA9IGQudG9Mb2NhbGVUaW1lU3RyaW5nKCk7CiAgfQogIHNldEludGVydmFsKHRpY2ssIDEwMDApOwogIHRpY2soKTsKPC9zY3JpcHQ+Cgo8L2JvZHk+CjwvaHRtbD4K" title="B.E.E.Z 4000"></iframe>
-  </aside>
-  <div class="beez-modal" id="beezModal" aria-hidden="true">
-    <div class="beez-modal-card" role="dialog" aria-modal="true" aria-label="B.E.E.Z 4000">
-      <button class="beez-close" id="beezClose" type="button" aria-label="Close B.E.E.Z">×</button>
-      <iframe src="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04Ij4KPHRpdGxlPkIuRS5FLlogNDAwMDwvdGl0bGU+CjxzdHlsZT4KICAgdXJsKCJodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PUJha2JhaytPbmUmZGlzcGxheT1zd2FwIik7CiAgOnJvb3QgewogICAgLS1ncmVlbjogIzNkZmY2ZTsKICAgIC0tZ3JlZW4tZGltOiAjMWM3YTM0OwogICAgLS1ncmVlbi1nbG93OiByZ2JhKDYxLCAyNTUsIDExMCwgMC41NSk7CiAgICAtLWJnLWJsYWNrOiAjMDEwNDAxOwogIH0KCiAgKiB7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IH0KCiAgaHRtbCwgYm9keSB7CiAgICBtYXJnaW46IDA7CiAgICBwYWRkaW5nOiAwOwogICAgaGVpZ2h0OiAxMDAlOwogICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7CiAgICBmb250LWZhbWlseTogQXJpYWwsIHNhbnMtc2VyaWY7CiAgICBkaXNwbGF5OiBmbGV4OwogICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgIGp1c3RpZnktY29udGVudDogY2VudGVyOwogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICB9CgogIEBmb250LWZhY2UgewogICAgZm9udC1mYW1pbHk6ICdTaGFyZSBUZWNoIE1vbm8nOwogICAgc3JjOiBsb2NhbCgnU2hhcmUgVGVjaCBNb25vJyk7CiAgfQoKICAuZGV2aWNlIHsKICAgIHdpZHRoOiBtaW4oNjQwcHgsIDEwMHZ3KTsKICAgIGFzcGVjdC1yYXRpbzogNCAvIDM7CiAgICBoZWlnaHQ6IGF1dG87CiAgICBiYWNrZ3JvdW5kOiAjMGEwYTBhOwogICAgYm9yZGVyLXJhZGl1czogMThweDsKICAgIHBhZGRpbmc6IDE0cHg7CiAgICBib3gtc2hhZG93OgogICAgICBpbnNldCAwIDAgMTJweCAjMDAwLAogICAgICAwIDAgNDBweCByZ2JhKDAsMCwwLDAuOCk7CiAgfQoKICAuc2NyZWVuLWZyYW1lIHsKICAgIHBvc2l0aW9uOiByZWxhdGl2ZTsKICAgIHdpZHRoOiAxMDAlOwogICAgaGVpZ2h0OiAxMDAlOwogICAgYm9yZGVyLXJhZGl1czogMTBweDsKICAgIGJhY2tncm91bmQ6IHZhcigtLWJnLWJsYWNrKTsKICAgIG92ZXJmbG93OiBoaWRkZW47CiAgICBib3gtc2hhZG93OgogICAgICBpbnNldCAwIDAgNjBweCAxMHB4IHJnYmEoMCwwLDAsMC45KSwKICAgICAgaW5zZXQgMCAwIDRweCAjMDAwOwogICAgLyogYmFycmVsIGRpc3RvcnRpb24gdmlhIGJvcmRlci1yYWRpdXMgdHJpY2sgKyB0cmFuc2Zvcm0gb24gaW5uZXIgY29udGVudCAqLwogIH0KCiAgLyogQ1JUIGN1cnZhdHVyZSBpbGx1c2lvbiAqLwogIC5jcnQtY3VydmUgewogICAgcG9zaXRpb246IGFic29sdXRlOwogICAgaW5zZXQ6IDA7CiAgICBib3JkZXItcmFkaXVzOiAxMHB4OwogICAgb3ZlcmZsb3c6IGhpZGRlbjsKICAgIGZpbHRlcjogbm9uZTsKICB9CgogIC5jcnQtZWRnZS1zaGFkZSB7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBpbnNldDogMDsKICAgIHotaW5kZXg6IDk7CiAgICBwb2ludGVyLWV2ZW50czogbm9uZTsKICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7CiAgICBib3gtc2hhZG93OgogICAgICBpbnNldCAwIDAgNDBweCAxMHB4IHJnYmEoMCwwLDAsMC41NSksCiAgICAgIGluc2V0IDAgMCA5MHB4IDMwcHggcmdiYSgwLDAsMCwwLjM1KTsKICB9CgogIC5jb250ZW50IHsKICAgIHBvc2l0aW9uOiByZWxhdGl2ZTsKICAgIHdpZHRoOiAxMDAlOwogICAgaGVpZ2h0OiAxMDAlOwogICAgY29sb3I6IHZhcigtLWdyZWVuKTsKICAgIHRleHQtc2hhZG93OgogICAgICAwIDAgMnB4IHZhcigtLWdyZWVuLWdsb3cpLAogICAgICAwIDAgNnB4IHZhcigtLWdyZWVuLWdsb3cpLAogICAgICAwIDAgMTJweCByZ2JhKDYxLDI1NSwxMTAsMC4yNSk7CiAgICBmaWx0ZXI6IGJsdXIoMC4yNXB4KTsKICAgIGRpc3BsYXk6IGZsZXg7CiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uOwogIH0KCiAgLyogTG93LXJlcyBmZWVsOiBwaXhlbGF0aW9uIHZpYSBzY2FsZWQtZG93biByZW5kZXJpbmcgKi8KICAucGl4ZWxhdGVkIHsKICAgIGltYWdlLXJlbmRlcmluZzogcGl4ZWxhdGVkOwogIH0KCiAgLyogVGFicyAqLwogIC50YWJzIHsKICAgIGRpc3BsYXk6IGZsZXg7CiAgICBib3JkZXItYm90dG9tOiAycHggc29saWQgdmFyKC0tZ3JlZW4tZGltKTsKICAgIGZsZXgtc2hyaW5rOiAwOwogICAgcGFkZGluZzogNnB4IDZweCAwIDZweDsKICAgIGdhcDogMnB4OwogIH0KCiAgLnRhYiB7CiAgICBmbGV4OiAxOwogICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgcGFkZGluZzogOHB4IDRweCA2cHg7CiAgICBmb250LXNpemU6IDE1cHg7CiAgICBsZXR0ZXItc3BhY2luZzogMnB4OwogICAgY3Vyc29yOiBwb2ludGVyOwogICAgY29sb3I6IHZhcigtLWdyZWVuLWRpbSk7CiAgICBib3JkZXI6IDFweCBzb2xpZCB0cmFuc3BhcmVudDsKICAgIGJvcmRlci1ib3R0b206IG5vbmU7CiAgICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDsKICAgIGZvbnQtZmFtaWx5OiBpbmhlcml0OwogICAgdHJhbnNpdGlvbjogY29sb3IgMC4xczsKICAgIHVzZXItc2VsZWN0OiBub25lOwogIH0KCiAgLnRhYjpob3ZlciB7CiAgICBjb2xvcjogIzdkZmZhMDsKICB9CgogIC50YWIuYWN0aXZlIHsKICAgIGNvbG9yOiB2YXIoLS1ncmVlbik7CiAgICBib3JkZXItY29sb3I6IHZhcigtLWdyZWVuLWRpbSk7CiAgICBiYWNrZ3JvdW5kOiByZ2JhKDYxLDI1NSwxMTAsMC4wNik7CiAgfQoKICAudGFiLmFjdGl2ZTo6YWZ0ZXIgewogICAgY29udGVudDogIiI7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBib3R0b206IC0ycHg7CiAgICBsZWZ0OiAwOwogICAgcmlnaHQ6IDA7CiAgICBoZWlnaHQ6IDJweDsKICAgIGJhY2tncm91bmQ6IHZhcigtLWdyZWVuKTsKICAgIGJveC1zaGFkb3c6IDAgMCA4cHggdmFyKC0tZ3JlZW4tZ2xvdyk7CiAgfQoKICAvKiBQYW5lbCBjb250ZW50ICovCiAgLnBhbmVsIHsKICAgIGZsZXg6IDE7CiAgICBwYWRkaW5nOiAxNnB4IDE4cHg7CiAgICBmb250LXNpemU6IDE0cHg7CiAgICBsaW5lLWhlaWdodDogMS42OwogICAgb3ZlcmZsb3cteTogYXV0bzsKICAgIGRpc3BsYXk6IG5vbmU7CiAgfQoKICAucGFuZWwuYWN0aXZlIHsgZGlzcGxheTogYmxvY2s7IH0KCiAgLnBhbmVsIGgxIHsKICAgIGZvbnQtc2l6ZTogMTZweDsKICAgIGxldHRlci1zcGFjaW5nOiAzcHg7CiAgICBtYXJnaW46IDAgMCAxMnB4IDA7CiAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgdmFyKC0tZ3JlZW4tZGltKTsKICAgIHBhZGRpbmctYm90dG9tOiA2cHg7CiAgfQoKICAucm93IHsKICAgIGRpc3BsYXk6IGZsZXg7CiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47CiAgICBib3JkZXItYm90dG9tOiAxcHggZG90dGVkIHJnYmEoNjEsMjU1LDExMCwwLjIpOwogICAgcGFkZGluZzogNHB4IDA7CiAgfQoKICAuYmFyLW91dGVyIHsKICAgIHdpZHRoOiAxMDBweDsKICAgIGhlaWdodDogOHB4OwogICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tZ3JlZW4tZGltKTsKICAgIGRpc3BsYXk6IGlubGluZS1ibG9jazsKICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7CiAgfQoKICAuYmFyLWlubmVyIHsKICAgIGhlaWdodDogMTAwJTsKICAgIGJhY2tncm91bmQ6IHZhcigtLWdyZWVuKTsKICAgIGJveC1zaGFkb3c6IDAgMCA2cHggdmFyKC0tZ3JlZW4tZ2xvdyk7CiAgfQoKICB1bC5saXN0IHsgbGlzdC1zdHlsZTogbm9uZTsgbWFyZ2luOiAwOyBwYWRkaW5nOiAwOyB9CiAgdWwubGlzdCBsaSB7CiAgICBwYWRkaW5nOiA1cHggMDsKICAgIGJvcmRlci1ib3R0b206IDFweCBkb3R0ZWQgcmdiYSg2MSwyNTUsMTEwLDAuMTUpOwogICAgY3Vyc29yOiBkZWZhdWx0OwogIH0KICB1bC5saXN0IGxpOmhvdmVyIHsgY29sb3I6ICNmZmZmZmY7IHRleHQtc2hhZG93OiAwIDAgOHB4IHZhcigtLWdyZWVuLWdsb3cpOyB9CgogIC5ibGluayB7IGFuaW1hdGlvbjogYmxpbmsgMS4xcyBzdGVwcygyKSBpbmZpbml0ZTsgfQogIEBrZXlmcmFtZXMgYmxpbmsgeyA1MCUgeyBvcGFjaXR5OiAwOyB9IH0KCiAgLyogU2NhbmxpbmVzICovCiAgLnNjYW5saW5lcyB7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBpbnNldDogMDsKICAgIHBvaW50ZXItZXZlbnRzOiBub25lOwogICAgYmFja2dyb3VuZDogcmVwZWF0aW5nLWxpbmVhci1ncmFkaWVudCgKICAgICAgdG8gYm90dG9tLAogICAgICByZ2JhKDAsMCwwLDApIDBweCwKICAgICAgcmdiYSgwLDAsMCwwKSAxcHgsCiAgICAgIHJnYmEoMCwwLDAsMC4zNSkgMnB4LAogICAgICByZ2JhKDAsMCwwLDAuMzUpIDNweAogICAgKTsKICAgIG1peC1ibGVuZC1tb2RlOiBtdWx0aXBseTsKICAgIHotaW5kZXg6IDU7CiAgfQoKICAvKiBSb2xsaW5nIHNjYW5saW5lIGdsb3cgYmFuZCAqLwogIC5yb2xsIHsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIGxlZnQ6IDA7IHJpZ2h0OiAwOwogICAgaGVpZ2h0OiA0MHB4OwogICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgcmdiYSg2MSwyNTUsMTEwLDApIDAlLCByZ2JhKDYxLDI1NSwxMTAsMC4wNykgNTAlLCByZ2JhKDYxLDI1NSwxMTAsMCkgMTAwJSk7CiAgICBhbmltYXRpb246IHJvbGxtb3ZlIDZzIGxpbmVhciBpbmZpbml0ZTsKICAgIHBvaW50ZXItZXZlbnRzOiBub25lOwogICAgei1pbmRleDogNjsKICB9CiAgQGtleWZyYW1lcyByb2xsbW92ZSB7CiAgICAwJSB7IHRvcDogLTQwcHg7IH0KICAgIDEwMCUgeyB0b3A6IDEwMCU7IH0KICB9CgogIC8qIFZpZ25ldHRlICsgY3VydmF0dXJlIHNoYWRpbmcgKi8KICAudmlnbmV0dGUgewogICAgZGlzcGxheTogbm9uZTsKICB9CgogIC8qIENocm9tYXRpYy1pc2ggZmxpY2tlciAqLwogIC5mbGlja2VyIHsKICAgIGFuaW1hdGlvbjogZmxpY2tlciA0cyBpbmZpbml0ZTsKICB9CiAgQGtleWZyYW1lcyBmbGlja2VyIHsKICAgIDAlLCA5NiUsIDEwMCUgeyBvcGFjaXR5OiAxOyB9CiAgICA5NyUgeyBvcGFjaXR5OiAwLjg1OyB9CiAgICA5OCUgeyBvcGFjaXR5OiAwLjk1OyB9CiAgfQoKICAvKiBOb2lzZSB0ZXh0dXJlICovCiAgLm5vaXNlIHsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIGluc2V0OiAwOwogICAgei1pbmRleDogNDsKICAgIG9wYWNpdHk6IDAuMDU7CiAgICBwb2ludGVyLWV2ZW50czogbm9uZTsKICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybCgiZGF0YTppbWFnZS9zdmcreG1sO3V0ZjgsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC45JyBudW1PY3RhdmVzPScyJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUyNScgaGVpZ2h0PScxMDAlMjUnIGZpbHRlcj0ndXJsKCUyM24pJy8+PC9zdmc+Iik7CiAgfQoKICAuZ2xhc3MtcmVmbGVjdGlvbiB7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBpbnNldDogMDsKICAgIHotaW5kZXg6IDg7CiAgICBwb2ludGVyLWV2ZW50czogbm9uZTsKICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgxMjBkZWcsIHJnYmEoMjU1LDI1NSwyNTUsMC4wNSkgMCUsIHJnYmEoMjU1LDI1NSwyNTUsMCkgMzAlKTsKICB9CgogIC5mb290ZXIgewogICAgZmxleC1zaHJpbms6IDA7CiAgICBmb250LXNpemU6IDExcHg7CiAgICBwYWRkaW5nOiA0cHggMTBweDsKICAgIGNvbG9yOiB2YXIoLS1ncmVlbi1kaW0pOwogICAgYm9yZGVyLXRvcDogMXB4IHNvbGlkIHZhcigtLWdyZWVuLWRpbSk7CiAgICBkaXNwbGF5OiBmbGV4OwogICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuOwogIH0KCiAgc21hbGwgeyBjb2xvcjogdmFyKC0tZ3JlZW4tZGltKTsgfQogIC50YWJzLCAudGFiLCAucGFuZWwgaDEgeyBmb250LWZhbWlseTogJ0Jha2JhayBPbmUnLCBzYW5zLXNlcmlmOyB9CiAgLnNjcmVlbi1mcmFtZSB7IGJveC1zaGFkb3c6IG5vbmU7IH0KICAuY3J0LWVkZ2Utc2hhZGUsIC5zY2FubGluZXMsIC5yb2xsLCAubm9pc2UsIC5nbGFzcy1yZWZsZWN0aW9uIHsgZGlzcGxheTogbm9uZSAhaW1wb3J0YW50OyB9CiAgLmNvbnRlbnQsIC5jb250ZW50ICosIC50YWJzLCAudGFiLCAucGFuZWwsIC5wYW5lbCAqLCAuZm9vdGVyLCAuZm9vdGVyICogeyBjb2xvcjogcmdiKDYxLCAyNTUsIDExMCkgIWltcG9ydGFudDsgdGV4dC1zaGFkb3c6IDAgMCA1cHggcmdiYSg2MSwgMjU1LCAxMTAsIDAuNDUpOyB9Cjwvc3R5bGU+CjwvaGVhZD4KPGJvZHk+Cgo8c3ZnIHdpZHRoPSIwIiBoZWlnaHQ9IjAiIHN0eWxlPSJwb3NpdGlvbjphYnNvbHV0ZSI+CiAgPGZpbHRlciBpZD0iY3J0QnVsZ2UiPgogICAgPGZlSW1hZ2UgcmVzdWx0PSJtYXAiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2Uvc3ZnK3htbDt1dGY4LCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJyUzRSUzQ3JhZGlhbEdyYWRpZW50IGlkPSdnJyBjeD0nNTAlMjUnIGN5PSc1MCUyNScgcj0nNzUlMjUnJTNFJTNDc3RvcCBvZmZzZXQ9JzAlMjUnIHN0b3AtY29sb3I9JyUyMzgwODA4MCcvJTNFJTNDc3RvcCBvZmZzZXQ9JzEwMCUyNScgc3RvcC1jb2xvcj0nJTIzZmZmZmZmJy8lM0UlM0MvcmFkaWFsR3JhZGllbnQlM0UlM0NyZWN0IHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJyBmaWxsPSd1cmwoJTIzZyknLyUzRSUzQy9zdmclM0UiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz4KICAgIDxmZURpc3BsYWNlbWVudE1hcCBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJtYXAiIHNjYWxlPSIyNiIgeENoYW5uZWxTZWxlY3Rvcj0iUiIgeUNoYW5uZWxTZWxlY3Rvcj0iUiIvPgogIDwvZmlsdGVyPgo8L3N2Zz4KCjxkaXYgY2xhc3M9ImRldmljZSI+CiAgPGRpdiBjbGFzcz0ic2NyZWVuLWZyYW1lIGZsaWNrZXIiPgogICAgPGRpdiBjbGFzcz0iY3J0LWN1cnZlIj4KICAgICAgPGRpdiBjbGFzcz0iY29udGVudCIgaWQ9ImNvbnRlbnQiPgogICAgICAgIDxkaXYgY2xhc3M9InRhYnMiIGlkPSJ0YWJzIj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiBhY3RpdmUiIGRhdGEtcGFuZWw9InN0YXQiPlNUQVQ8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0idXBnIj5VUEc8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0iaW52Ij5JTlY8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0icmViIj5SRUI8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0idW5pIj5VTkk8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InRhYiIgZGF0YS1wYW5lbD0idHJtIj5UUk08L2Rpdj4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGRpdiBjbGFzcz0icGFuZWwgYWN0aXZlIiBpZD0ic3RhdCI+CiAgICAgICAgICA8aDE+VklUQUxTIC8vIFVOSVQtMDE8L2gxPgogICAgICAgICAgPGRpdiBjbGFzcz0icm93Ij48c3Bhbj5IRUFMVEg8L3NwYW4+PHNwYW4gY2xhc3M9ImJhci1vdXRlciI+PHNwYW4gY2xhc3M9ImJhci1pbm5lciIgc3R5bGU9IndpZHRoOjgyJSI+PC9zcGFuPjwvc3Bhbj48L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+RU5FUkdZPC9zcGFuPjxzcGFuIGNsYXNzPSJiYXItb3V0ZXIiPjxzcGFuIGNsYXNzPSJiYXItaW5uZXIiIHN0eWxlPSJ3aWR0aDo2NCUiPjwvc3Bhbj48L3NwYW4+PC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJyb3ciPjxzcGFuPlJBRCBMVkw8L3NwYW4+PHNwYW4gY2xhc3M9ImJhci1vdXRlciI+PHNwYW4gY2xhc3M9ImJhci1pbm5lciIgc3R5bGU9IndpZHRoOjEyJSI+PC9zcGFuPjwvc3Bhbj48L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+SFlEUkFUSU9OPC9zcGFuPjxzcGFuIGNsYXNzPSJiYXItb3V0ZXIiPjxzcGFuIGNsYXNzPSJiYXItaW5uZXIiIHN0eWxlPSJ3aWR0aDo0NyUiPjwvc3Bhbj48L3NwYW4+PC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJyb3ciPjxzcGFuPkxPQ0FUSU9OPC9zcGFuPjxzcGFuPlNFQ1RPUiA3IC0gU1VCTEVWRUwgMjwvc3Bhbj48L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+VElNRSBFTEFQU0VEPC9zcGFuPjxzcGFuPjAxNDoyMjowNzwvc3Bhbj48L2Rpdj4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGRpdiBjbGFzcz0icGFuZWwiIGlkPSJ1cGciPgogICAgICAgICAgPGgxPlVQR1JBREVTPC9oMT4KICAgICAgICAgIDx1bCBjbGFzcz0ibGlzdCI+CiAgICAgICAgICAgIDxsaT4mZ3Q7IFNFUlZPIFBMQVRJTkcgTUsuSUkgLi4uLi4uLi4uLi4uLi4uLiBJTlNUQUxMRUQ8L2xpPgogICAgICAgICAgICA8bGk+Jmd0OyBPUFRJQyBGSUxURVIgKE5JR0hUKSAuLi4uLi4uLi4uLi4uLi4uIElOU1RBTExFRDwvbGk+CiAgICAgICAgICAgIDxsaT4mZ3Q7IFJBRCBTSElFTERJTkcgLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gTE9DS0VEPC9saT4KICAgICAgICAgICAgPGxpPiZndDsgQVVYIEJBVFRFUlkgQ0VMTCAuLi4uLi4uLi4uLi4uLi4uLi4uLiBBVkFJTEFCTEU8L2xpPgogICAgICAgICAgICA8bGk+Jmd0OyBWT0lDRSBNT0RVTEUgVjMgLi4uLi4uLi4uLi4uLi4uLi4uLi4uIEFWQUlMQUJMRTwvbGk+CiAgICAgICAgICA8L3VsPgogICAgICAgIDwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJwYW5lbCIgaWQ9ImludiI+CiAgICAgICAgICA8aDE+SU5WRU5UT1JZPC9oMT4KICAgICAgICAgIDx1bCBjbGFzcz0ibGlzdCI+CiAgICAgICAgICAgIDxsaT5TVElNUEFLLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi54MDM8L2xpPgogICAgICAgICAgICA8bGk+UlVTVEVEIEdFQVIuLi4uLi4uLi4uLi4uLi4uLi4uLngwNzwvbGk+CiAgICAgICAgICAgIDxsaT5QVVJJRklFRCBXQVRFUi4uLi4uLi4uLi4uLi4uLi4ueDAyPC9saT4KICAgICAgICAgICAgPGxpPlNDUkFQIENJUkNVSVQuLi4uLi4uLi4uLi4uLi4uLi4ueDExPC9saT4KICAgICAgICAgICAgPGxpPkRVQ1QgVEFQRS4uLi4uLi4uLi4uLi4uLi4uLi4uLi54MDE8L2xpPgogICAgICAgICAgPC91bD4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGRpdiBjbGFzcz0icGFuZWwiIGlkPSJyZWIiPgogICAgICAgICAgPGgxPlJBRElPIC8gQkVBQ09OPC9oMT4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+RlJFUTwvc3Bhbj48c3Bhbj4xMDEuNCBNSHo8L3NwYW4+PC9kaXY+CiAgICAgICAgICA8ZGl2IGNsYXNzPSJyb3ciPjxzcGFuPlNJR05BTDwvc3Bhbj48c3BhbiBjbGFzcz0iYmFyLW91dGVyIj48c3BhbiBjbGFzcz0iYmFyLWlubmVyIiBzdHlsZT0id2lkdGg6MzglIj48L3NwYW4+PC9zcGFuPjwvZGl2PgogICAgICAgICAgPHAgc3R5bGU9Im1hcmdpbi10b3A6MTRweDsiPlNDQU5OSU5HIEZPUiBCUk9BRENBU1Q8c3BhbiBjbGFzcz0iYmxpbmsiPl88L3NwYW4+PC9wPgogICAgICAgIDwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJwYW5lbCIgaWQ9InVuaSI+CiAgICAgICAgICA8aDE+VU5JVCBJTkZPPC9oMT4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+TU9ERUw8L3NwYW4+PHNwYW4+Qi5FLkUuWiA0MDAwPC9zcGFuPjwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0icm93Ij48c3Bhbj5GSVJNV0FSRTwvc3Bhbj48c3Bhbj52MS4wMy43PC9zcGFuPjwvZGl2PgogICAgICAgICAgPGRpdiBjbGFzcz0icm93Ij48c3Bhbj5TRVJJQUw8L3NwYW4+PHNwYW4+QlotNDQxOS1YUjwvc3Bhbj48L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InJvdyI+PHNwYW4+T1dORVI8L3NwYW4+PHNwYW4+VU5SRUdJU1RFUkVEPC9zcGFuPjwvZGl2PgogICAgICAgIDwvZGl2PgoKICAgICAgICA8ZGl2IGNsYXNzPSJwYW5lbCIgaWQ9InRybSI+CiAgICAgICAgICA8aDE+VEVSTUlOQUw8L2gxPgogICAgICAgICAgPHA+Jmd0OyBBV0FJVElORyBJTlBVVDxzcGFuIGNsYXNzPSJibGluayI+Xzwvc3Bhbj48L3A+CiAgICAgICAgPC9kaXY+CgogICAgICAgIDxkaXYgY2xhc3M9ImZvb3RlciI+CiAgICAgICAgICA8c3BhbiBpZD0iY2xvY2siPjAwOjAwOjAwPC9zcGFuPgogICAgICAgICAgPHNwYW4+Qi5FLkUuWiA0MDAwIC8vIE9OTElORTwvc3Bhbj4KICAgICAgICA8L2Rpdj4KICAgICAgPC9kaXY+CgogICAgICA8ZGl2IGNsYXNzPSJub2lzZSI+PC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9InJvbGwiPjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJzY2FubGluZXMiPjwvZGl2PgogICAgICA8ZGl2IGNsYXNzPSJnbGFzcy1yZWZsZWN0aW9uIj48L2Rpdj4KICAgIDwvZGl2PgogICAgPGRpdiBjbGFzcz0iY3J0LWVkZ2Utc2hhZGUiPjwvZGl2PgogIDwvZGl2Pgo8L2Rpdj4KCjxzY3JpcHQ+CiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnRhYicpLmZvckVhY2godGFiID0+IHsKICAgIHRhYi5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsICgpID0+IHsKICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnRhYicpLmZvckVhY2godCA9PiB0LmNsYXNzTGlzdC5yZW1vdmUoJ2FjdGl2ZScpKTsKICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnBhbmVsJykuZm9yRWFjaChwID0+IHAuY2xhc3NMaXN0LnJlbW92ZSgnYWN0aXZlJykpOwogICAgICB0YWIuY2xhc3NMaXN0LmFkZCgnYWN0aXZlJyk7CiAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKHRhYi5kYXRhc2V0LnBhbmVsKS5jbGFzc0xpc3QuYWRkKCdhY3RpdmUnKTsKICAgIH0pOwogIH0pOwoKICBmdW5jdGlvbiB0aWNrKCkgewogICAgY29uc3QgZCA9IG5ldyBEYXRlKCk7CiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnY2xvY2snKS50ZXh0Q29udGVudCA9IGQudG9Mb2NhbGVUaW1lU3RyaW5nKCk7CiAgfQogIHNldEludGVydmFsKHRpY2ssIDEwMDApOwogIHRpY2soKTsKPC9zY3JpcHQ+Cgo8L2JvZHk+CjwvaHRtbD4K" title="B.E.E.Z 4000"></iframe>
-    </div>
-  </div>
-
-  <script>
-    /* The B.E.E.Z. screen is a self-contained data-URL document. Upgrade its
-       display here so both the small panel and the modal stay identical. */
-    (() => {
-      const screenStyle = `
-        .beez-menu-title { margin:0 0 10px; color:#fff !important; font-size:20px; letter-spacing:3px; text-align:center; text-shadow:0 0 10px var(--green-glow) !important; }
-        .upgrade-tabs { display:flex; gap:6px; margin:-2px 0 12px; }
-        .upgrade-subtab { flex:1; border:1px solid var(--green-dim); background:transparent; color:var(--green); font:inherit; font-size:12px; letter-spacing:1px; padding:6px 4px; cursor:pointer; }
-        .upgrade-subtab.active { color:#fff !important; border-color:#fff; background:rgba(255,255,255,.16); box-shadow:inset 0 -2px #fff, 0 0 8px rgba(255,255,255,.45); }
-        .upgrade-subpanel { display:none; } .upgrade-subpanel.active { display:block; }
-        .upgrade-note { margin:10px 0 0; font-size:12px; color:var(--green-dim); }
-        .buy-upgrade { width:100%; margin-top:12px; border:1px solid #fff; background:rgba(255,255,255,.14); color:#fff !important; font:inherit; font-size:12px; letter-spacing:1px; padding:9px 6px; cursor:pointer; }
-        .buy-upgrade:hover { background:rgba(255,255,255,.28); }
-        .rebirth-orbs { display:flex; flex-wrap:wrap; gap:8px; min-height:52px; margin:2px 0 12px; }
-        .rebirth-orb { width:44px; height:44px; display:grid; place-items:center; border-radius:50%; color:#fff !important; font-size:10px; font-weight:bold; text-shadow:none !important; box-shadow:0 0 12px var(--orb-color), inset 0 0 10px rgba(255,255,255,.55); }
-        .rebirth-empty { margin:10px 0; color:var(--green-dim); font-size:12px; }
-        .rebirth-button { width:100%; margin-top:12px; border:1px solid #fff; background:rgba(255,255,255,.14); color:#fff !important; font:inherit; font-size:12px; letter-spacing:1px; padding:9px 6px; cursor:pointer; }
-        .rebirth-button:disabled { opacity:.42; cursor:not-allowed; }
-        .perk-upgrade-tabs { display:flex; gap:6px; margin:12px 0 8px; }
-        .perk-upgrade-choice { flex:1; border:1px solid var(--green-dim); background:transparent; color:var(--green); font:inherit; font-size:12px; letter-spacing:1px; padding:6px 4px; cursor:pointer; }
-        .perk-upgrade-choice.active { color:#fff !important; border-color:#fff; background:rgba(255,255,255,.16); box-shadow:inset 0 -2px #fff; }
-        .save-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px; }
-        .save-status { min-height:18px; margin-top:12px; color:var(--green-dim); font-size:11px; text-align:center; }
-      `;
-      const statPanel = `<div class="panel active" id="stat">
-          <h1>STATISTICS</h1>
-          <div class="row"><span>STATUS</span><span id="statStatus">ACTIVE</span></div>
-          <div class="row"><span>TOTAL CLICKS</span><span id="statClicks">0</span></div>
-          <div class="row"><span>TOTAL LEVELS</span><span id="statLevels">1</span></div>
-          <div class="row"><span>TOTAL UPGRADES</span><span id="statUpgrades">0</span></div>
-          <div class="row"><span>TOTAL ITEMS</span><span id="statItems">0</span></div>
-          <div class="row"><span>REBIRTHS</span><span id="statRebirths">0</span></div>
-        </div>`;
-      const upgradePanel = `<div class="panel" id="upg">
-          <h1>UPGRADES</h1>
-          <div class="upgrade-subpanel active" id="upgrade-perks">
-            <div class="perk-upgrade-tabs" role="tablist">
-              <button class="perk-upgrade-choice active" type="button" data-perk-upgrade="speed">SPEED</button>
-              <button class="perk-upgrade-choice" type="button" data-perk-upgrade="luck">LUCK</button>
-            </div>
-            <div class="row"><span id="perkUpgradeTitle">SPEED LEVEL 0</span><span id="perkUpgradeEffect">x1</span></div>
-            <p class="upgrade-note" id="perkUpgradeHint"></p>
-            <button class="buy-upgrade" id="buyPerkUpgrade" type="button" hidden>BUY UPGRADE</button>
-          </div>
-        </div>`;
-      const rebirthPanel = `<div class="panel" id="reb">
-          <h1>REBIRTH</h1>
-          <div class="rebirth-orbs" id="rebirthOrbs"></div>
-          <p class="rebirth-empty" id="rebirthHint">Reach level 10000 to rebirth.</p>
-          <button class="rebirth-button" id="rebirthButton" type="button">REBIRTH</button>
-        </div>`;
-      const savePanel = `<div class="panel" id="save">
-          <h1>SAVE DATA</h1>
-          <p class="upgrade-note">DONT LOSE YOUR SAVE FELLRR PLEASE</p>
-          <div class="save-actions">
-            <button class="buy-upgrade" id="downloadSave" type="button">SAVE</button>
-            <button class="buy-upgrade" id="loadSave" type="button">LOAD</button>
-          </div>
-          <input id="saveFileInput" type="file" accept="application/json,.json" hidden>
-          <p class="save-status" id="saveStatus"></p>
-        </div>`;
-      const inventoryPanel = ``;
-      const unitPanel = ``;
-      const screenScript = `<script>
-        let gameStats = { level: 1, totalClicks: 0, upgrades: 0, items: 0, rebirths: 0, nextRebirthLevel: 10000, rebirthHistory: [], clickMultiplier: 1, speedUpgradeLevel: 0, luckUpgradeLevel: 0, perks: [] };
-        let selectedPerkUpgrade = 'speed';
-        const number = value => Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 1 });
-        const milestone = value => Number(value) >= 1000 ? (Number(value) / 1000) + 'K' : number(value);
-        const multiplier = value => Number(value || 1).toFixed(1).replace(/\.0$/, '');
-        function renderGameStats() {
-          document.getElementById('statStatus').textContent = 'ACTIVE';
-          document.getElementById('statClicks').textContent = number(gameStats.totalClicks);
-          document.getElementById('statLevels').textContent = number(gameStats.level);
-          document.getElementById('statUpgrades').textContent = number(gameStats.upgrades);
-          document.getElementById('statItems').textContent = number(gameStats.items);
-          document.getElementById('statRebirths').textContent = number(gameStats.rebirths);
-          const rebirthButton = document.getElementById('rebirthButton');
-          const nextRebirthLevel = Number(gameStats.nextRebirthLevel || 10000);
-          const canRebirth = Number(gameStats.level || 1) >= nextRebirthLevel;
-          document.getElementById('rebirthHint').textContent = canRebirth ? 'READY — LEVEL ' + nextRebirthLevel + ' REACHED' : 'Reach level ' + number(nextRebirthLevel) + ' to rebirth.';
-          rebirthButton.disabled = !canRebirth;
-          rebirthButton.textContent = canRebirth ? 'REBIRTH NOW' : 'REBIRTH AT LEVEL ' + number(nextRebirthLevel);
-          const orbs = document.getElementById('rebirthOrbs');
-          const history = Array.isArray(gameStats.rebirthHistory) ? gameStats.rebirthHistory : [];
-          orbs.innerHTML = history.map(rebirth => '<span class="rebirth-orb" style="--orb-color:' + rebirth.color + ';background:' + rebirth.color + '">' + milestone(rebirth.requirement) + '</span>').join('');
-          if (!history.length) orbs.innerHTML = '<span class="rebirth-empty">rebirth collection is empty gng</span>';
-          document.querySelectorAll('.perk-upgrade-choice').forEach(choice => choice.classList.toggle('active', choice.dataset.perkUpgrade === selectedPerkUpgrade));
-          const perkLevel = Number(selectedPerkUpgrade === 'speed' ? gameStats.speedUpgradeLevel : gameStats.luckUpgradeLevel) || 0;
-          const nextPerkLevel = perkLevel + 1;
-          const perkRequiredLevel = nextPerkLevel * 1000;
-          const nextMultiplier = Math.pow(2, nextPerkLevel);
-          document.getElementById('perkUpgradeTitle').textContent = selectedPerkUpgrade.toUpperCase() + ' LEVEL ' + perkLevel;
-          document.getElementById('perkUpgradeEffect').textContent = 'x' + Math.pow(2, perkLevel);
-          document.getElementById('perkUpgradeHint').textContent = selectedPerkUpgrade === 'speed'
-            ? 'Level ' + nextPerkLevel + ': perks earn x' + nextMultiplier + ' faster. Requires level ' + number(perkRequiredLevel) + '.'
-            : 'Level ' + nextPerkLevel + ': perks earn x' + nextMultiplier + ' their current amount. Requires level ' + number(perkRequiredLevel) + '.';
-          const perkButton = document.getElementById('buyPerkUpgrade');
-          const canBuyPerkUpgrade = Number(gameStats.level || 1) >= perkRequiredLevel;
-          perkButton.hidden = !canBuyPerkUpgrade;
-          perkButton.textContent = 'BUY ' + selectedPerkUpgrade.toUpperCase() + ' — LEVEL ' + perkRequiredLevel;
-        }
-        document.querySelectorAll('.perk-upgrade-choice').forEach(choice => choice.addEventListener('click', () => { selectedPerkUpgrade = choice.dataset.perkUpgrade; renderGameStats(); }));
-        document.getElementById('buyPerkUpgrade').addEventListener('click', () => parent.postMessage({ type: 'beez-buy-perk-upgrade', upgrade: selectedPerkUpgrade }, '*'));
-        document.getElementById('rebirthButton').addEventListener('click', () => parent.postMessage({ type: 'beez-rebirth' }, '*'));
-        document.getElementById('downloadSave').addEventListener('click', () => parent.postMessage({ type: 'beez-export-save' }, '*'));
-        const saveFileInput = document.getElementById('saveFileInput');
-        const saveStatus = document.getElementById('saveStatus');
-        document.getElementById('loadSave').addEventListener('click', () => saveFileInput.click());
-        saveFileInput.addEventListener('change', () => {
-          const file = saveFileInput.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = () => {
-            try { parent.postMessage({ type: 'beez-import-save', save: JSON.parse(reader.result) }, '*'); saveStatus.textContent = 'SAVE LOADED'; }
-            catch { saveStatus.textContent = 'INVALID SAVE FILE'; }
-          };
-          reader.readAsText(file);
-        });
-        window.addEventListener('message', event => {
-          if (event.data && event.data.type === 'study-circle-game-stats') { gameStats = event.data.stats; renderGameStats(); }
-        });
-        renderGameStats();
-        parent.postMessage({ type: 'beez-ready' }, '*');
-      <\/script>`;
-
-      document.querySelectorAll('iframe[title="B.E.E.Z 4000"]').forEach(frame => {
-        const prefix = 'data:text/html;base64,';
-        if (!frame.src.startsWith(prefix)) return;
-        let source = decodeURIComponent(escape(atob(frame.src.slice(prefix.length))));
-        source = source.replace('</style>', screenStyle + '</style>');
-        source = source.replace('<div class="content" id="content">', '<div class="content" id="content"><h1 class="beez-menu-title">B.E.E.Z</h1>');
-        source = source.replace('<div class="tab" data-panel="reb">REB</div>', '<div class="tab" data-panel="reb">REB</div><div class="tab" data-panel="save">SAVE</div>');
-        source = source.replace(/<div class="panel active" id="stat">[\s\S]*?(?=\n\n        <div class="panel" id="upg">)/, statPanel + '\n');
-        source = source.replace(/<div class="panel" id="upg">[\s\S]*?(?=\n\n        <div class="panel" id="inv">)/, upgradePanel + '\n');
-        source = source.replace(/<div class="panel" id="reb">[\s\S]*?(?=\n\n        <div class="panel" id="uni">)/, rebirthPanel + '\n');
-        source = source.replace(/<div class="panel" id="inv">[\s\S]*?(?=\n\n        <div class="panel" id="reb">)/, inventoryPanel + '\n');
-        source = source.replace(/<div class="panel" id="uni">[\s\S]*?(?=\n\n        <div class="panel" id="trm">)/, unitPanel + '\n');
-        source = source.replace(/\n\s*<div class="panel" id="trm">[\s\S]*?<\/div>\n(?=\s*<div class="footer">)/, '\n');
-        source = source.replace(/\n\s*<div class="tab" data-panel="(?:inv|uni|trm)">[\s\S]*?<\/div>/g, '');
-        source = source.replace('<span>B.E.E.Z 4000 // ONLINE</span>', '<span>Bionically Electromagnetic Engine Zero</span>');
-        source = source.replace('<div class="footer">', savePanel + '\n<div class="footer">');
-        source = source.replace('</body>', screenScript + '</body>');
-        frame.src = prefix + btoa(unescape(encodeURIComponent(source)));
-      });
-
-      window.postBeezGameStats = stats => {
-        document.querySelectorAll('iframe[title="B.E.E.Z 4000"]').forEach(frame => frame.contentWindow?.postMessage({ type: 'study-circle-game-stats', stats }, '*'));
-      };
-      window.addEventListener('message', event => {
-        if (event.data?.type === 'beez-ready' && window.beezGameStats) window.postBeezGameStats(window.beezGameStats);
-      });
-    })();
-  </script>
 
   <section class="perks-panel" id="perksPanel" aria-label="Perks">
     <div class="perks-title-card">
@@ -1586,25 +1340,6 @@
     const inboxPanel = document.getElementById('inboxPanel');
     const battlepassPanel = document.getElementById('battlepassPanel');
     const perksPanel = document.getElementById('perksPanel');
-    const beezButton = document.getElementById('beezButton');
-    const beezModal = document.getElementById('beezModal');
-    const beezClose = document.getElementById('beezClose');
-
-    function closeBeez() {
-      beezModal.classList.remove('open');
-      beezModal.setAttribute('aria-hidden', 'true');
-      beezButton.setAttribute('aria-expanded', 'false');
-      beezButton.focus();
-    }
-    beezButton.addEventListener('click', () => {
-      beezModal.classList.add('open');
-      beezModal.setAttribute('aria-hidden', 'false');
-      beezButton.setAttribute('aria-expanded', 'true');
-      beezClose.focus();
-    });
-    beezClose.addEventListener('click', closeBeez);
-    beezModal.addEventListener('click', event => { if (event.target === beezModal) closeBeez(); });
-    window.addEventListener('keydown', event => { if (event.key === 'Escape' && beezModal.classList.contains('open')) closeBeez(); });
 
     document.querySelectorAll('button, .tab, .flex-swap-btn, .header-button, .whats-new-close, .cta').forEach(el => {
       const bop = () => {
@@ -1622,7 +1357,6 @@
         });
         btn.classList.add('active');
         btn.setAttribute('aria-current', 'page');
-        document.body.classList.toggle('home-tab-active', btn.dataset.tab === 'home');
 
         flexPanel.classList.toggle('open', btn.dataset.tab === 'flex');
         lunchPanel.classList.toggle('open', btn.dataset.tab === 'lunch');
@@ -1676,7 +1410,7 @@
       { id: 'albuqqi', season: 1, required: 50, name: 'Al-Buqqi', description: '+65 clicks every 9 seconds.', image: 'battlepass/s1/elbuki_Emoticon.png' },
       { id: 'flag', season: 1, required: 60, name: 'Verity Flag', description: '+90 clicks per turkey tap.', image: 'battlepass/s1/verity_backbling.png' },
       { id: 'ultimate', season: 1, required: 80, name: 'Ultimate Verity', description: '+150 clicks per turkey tap.', image: 'battlepass/s1/ULTIMATE.png' },
-      { id: 'demonte', season: 1, required: 500, name: 'Demonte Vershaw', description: '+330 clicks every 4 seconds.', image: 'battlepass/s1/demonte%20vershaw.png' },
+      { id: 'demonte', season: 1, required: 500, name: 'Demonte Vershaw', description: '+1 click every 4 seconds.', image: 'battlepass/s1/demonte%20vershaw.png' },
       { id: 'diamond', season: 1, required: 1500, name: 'DIAMOND VERITY', description: '+1000 clicks every second.', image: 'battlepass/s1/DIAMOND%20VERITY.png' }
     ];
     window.perkDefinitions = perkDefinitions;
@@ -1693,10 +1427,9 @@
         const card = document.createElement('button');
         card.className = 'perk-card' + (active ? ' active' : '');
         card.type = 'button';
-        card.disabled = Boolean(window.isOutOfEnergy?.());
         card.setAttribute('aria-pressed', String(active));
         card.innerHTML = `<img src="${perk.image}" alt=""><span class="perk-card-name">${perk.name}</span><span class="perk-card-description">${perk.description}</span><span class="perk-card-status">${active ? 'Deactivate' : 'Activate'}</span>`;
-        card.addEventListener('click', () => { if (!card.disabled) window.dispatchEvent(new CustomEvent(active ? 'perkdeactivate' : 'perkactivate', { detail: active ? perk.id : perk })); });
+        card.addEventListener('click', () => window.dispatchEvent(new CustomEvent(active ? 'perkdeactivate' : 'perkactivate', { detail: active ? perk.id : perk })));
         grid.appendChild(card);
       });
     }
@@ -1798,31 +1531,8 @@
       ? Math.floor(savedPlayerLevel.level)
       : 1;
     let clicksInLevel = !seasonChanged && Number.isFinite(savedPlayerLevel.clicksInLevel) && savedPlayerLevel.clicksInLevel >= 0
-      ? savedPlayerLevel.clicksInLevel
+      ? Math.floor(savedPlayerLevel.clicksInLevel)
       : 0;
-    // Total earned clicks is kept separately from the current level's XP so the
-    // Statistics screen can show a real lifetime total.
-    let totalClicks = !seasonChanged && Number.isFinite(savedPlayerLevel.totalClicks) && savedPlayerLevel.totalClicks >= 0
-      ? savedPlayerLevel.totalClicks
-      : clicksInLevel;
-    // Click upgrades are deliberately separate from level progress: reaching a
-    // milestone makes one available, but the player chooses when to buy it.
-    let purchasedClickUpgrades = !seasonChanged && Number.isInteger(savedPlayerLevel.purchasedClickUpgrades) && savedPlayerLevel.purchasedClickUpgrades >= 0
-      ? savedPlayerLevel.purchasedClickUpgrades
-      : 0;
-    let rebirthHistory = !seasonChanged && Array.isArray(savedPlayerLevel.rebirthHistory)
-      ? savedPlayerLevel.rebirthHistory.filter(rebirth => rebirth && Number.isFinite(rebirth.requirement) && typeof rebirth.color === 'string')
-      : [];
-    let rebirths = !seasonChanged && Number.isInteger(savedPlayerLevel.rebirths) && savedPlayerLevel.rebirths >= 0
-      ? Math.max(savedPlayerLevel.rebirths, rebirthHistory.length)
-      : rebirthHistory.length;
-    let speedUpgradeLevel = !seasonChanged && Number.isInteger(savedPlayerLevel.speedUpgradeLevel) && savedPlayerLevel.speedUpgradeLevel >= 0
-      ? savedPlayerLevel.speedUpgradeLevel
-      : 0;
-    let luckUpgradeLevel = !seasonChanged && Number.isInteger(savedPlayerLevel.luckUpgradeLevel) && savedPlayerLevel.luckUpgradeLevel >= 0
-      ? savedPlayerLevel.luckUpgradeLevel
-      : 0;
-    let isRebirthing = false;
     let clicksNeeded = clicksForLevel(level);
     clicksInLevel = Math.min(clicksInLevel, Math.max(0, clicksNeeded - 1));
 
@@ -1836,16 +1546,9 @@
     if (seasonNumber) seasonNumber.textContent = CURRENT_SEASON;
 
     const xpBarFill = document.getElementById('xpBarFill');
-    const energyBarFill = document.getElementById('energyBarFill');
-    const energyLevelLabel = document.getElementById('energyLevelLabel');
     const xpLevelLabel = document.getElementById('xpLevelLabel');
-    const xpLevelUpFlash = document.getElementById('xpLevelUpFlash');
-    const cpsWrap = document.getElementById('cpsWrap');
-    const cpsCounter = document.getElementById('cpsCounter');
-    const cpsMessage = document.getElementById('cpsMessage');
     const xpBurstLayer = document.getElementById('xpBurstLayer');
     const levelUpBanner = document.getElementById('levelUpBanner');
-    const xpBarWrap = document.querySelector('.xp-bar-wrap');
     const reduceAnimationsToggle = document.getElementById('reduceAnimationsToggle');
     const reduceMotionControl = reduceAnimationsToggle.closest('.reduce-motion-control');
     const whatsNewButton = document.getElementById('whatsNewButton');
@@ -1853,22 +1556,6 @@
     const whatsNewClose = document.getElementById('whatsNewClose');
     let reduceAnimations = false;
     let reduceLabelTimer;
-    let displayedCps = null;
-    let cpsEffectTimer;
-
-    function currentRebirthLevel() { return (rebirths + 1) * 10000; }
-    window.isOutOfEnergy = () => level >= currentRebirthLevel();
-
-    function updateEnergyUI() {
-      const target = currentRebirthLevel();
-      const energy = Math.max(0, Math.min(100, ((target - level) / Math.max(1, target - 1)) * 100));
-      energyBarFill.style.width = energy + '%';
-      energyLevelLabel.textContent = Math.ceil(energy) + '%';
-      const depleted = window.isOutOfEnergy();
-      document.body.classList.toggle('energy-depleted', depleted);
-      if (depleted && typeof activePerks !== 'undefined') [...activePerks.keys()].forEach(deactivatePerk);
-      window.dispatchEvent(new CustomEvent('energychange', { detail: { depleted, energy } }));
-    }
 
     function closeWhatsNew() {
       whatsNewOverlay.classList.remove('open');
@@ -1892,9 +1579,8 @@
     });
 
     function clearVisualEffects() {
-      box?.classList.remove('turkey-jump', 'turkey-level-flash', 'rebirthing', 'rebirth-white');
-      xpBarWrap?.classList.remove('rebirthing');
-      xpLevelUpFlash.classList.remove('show');
+      box?.classList.remove('turkey-jump', 'turkey-level-flash');
+      document.body.classList.remove('level-up-flash');
       levelUpBanner.classList.remove('show');
       xpBurstLayer.replaceChildren();
       document.querySelectorAll('.perk-bop, .ultimate-apparition, .diamond-apparition').forEach(element => {
@@ -1916,174 +1602,9 @@
       const pct = Math.min(100, (clicksInLevel / clicksNeeded) * 100);
       xpBarFill.style.width = pct + '%';
       xpLevelLabel.textContent = 'Level ' + level;
-      updateEnergyUI();
       window.dispatchEvent(new CustomEvent('studycirclelevelchange', { detail: { level } }));
       unlockCurrentSeasonPerks();
       savePlayerLevel();
-      publishBeezStats();
-      updateCpsUI();
-    }
-
-    function calculateCps() {
-      const baseCps = {
-        verity: 5,
-        connor: 10,
-        gobble: 10,
-        pickaxe: 10,
-        albuqqi: 65 / 9,
-        demonte: 82.5,
-        diamond: 1000
-      };
-      let cps = 0;
-      activePerks.forEach(perk => { cps += baseCps[perk.id] || 0; });
-      return Math.round(cps * getSpeedMultiplier() * getLuckMultiplier() * 10) / 10;
-    }
-
-    function updateCpsUI() {
-      const nextCps = calculateCps();
-      cpsCounter.textContent = (Number.isInteger(nextCps) ? nextCps : nextCps.toFixed(1)) + ' CPS';
-      cpsWrap.classList.remove('cps-tick');
-      void cpsWrap.offsetWidth;
-      cpsWrap.classList.add('cps-tick');
-      if (displayedCps === null) {
-        displayedCps = nextCps;
-        cpsWrap.classList.toggle('idle', nextCps === 0);
-        return;
-      }
-      if (nextCps === displayedCps) return;
-      clearTimeout(cpsEffectTimer);
-      cpsWrap.classList.remove('speeding', 'slowing', 'holy', 'recent-speed', 'recent-slow', 'idle');
-      void cpsWrap.offsetWidth;
-      if (nextCps > displayedCps) {
-        const holyCow = Math.random() < (1 / 3);
-        cpsMessage.textContent = holyCow ? 'HOLY COW!!!' : 'SPEED UP!';
-        cpsWrap.classList.add('speeding');
-        if (holyCow) cpsWrap.classList.add('holy');
-        cpsEffectTimer = setTimeout(() => {
-          cpsWrap.classList.remove('speeding', 'holy');
-          cpsWrap.classList.add('recent-speed');
-        }, 1450);
-      } else {
-        cpsMessage.textContent = '';
-        cpsWrap.classList.add('slowing');
-        cpsEffectTimer = setTimeout(() => {
-          cpsWrap.classList.remove('slowing');
-          if (nextCps > 0) cpsWrap.classList.add('recent-slow');
-          else cpsWrap.classList.add('idle');
-        }, 1550);
-      }
-      displayedCps = nextCps;
-    }
-
-    function getClickMultiplier() {
-      return 1 + purchasedClickUpgrades * 0.5;
-    }
-
-    function getSpeedMultiplier() {
-      return Math.pow(2, speedUpgradeLevel);
-    }
-
-    function getLuckMultiplier() {
-      return Math.pow(2, luckUpgradeLevel);
-    }
-
-    function clickUpgradeRequiredLevel(upgradeNumber) {
-      return 500 + upgradeNumber * 500;
-    }
-
-    function publishBeezStats() {
-      window.beezGameStats = {
-        level,
-        totalClicks,
-        upgrades: purchasedClickUpgrades,
-        items: unlockedPerkIds.size,
-        rebirths,
-        nextRebirthLevel: (rebirths + 1) * 10000,
-        rebirthHistory,
-        speedUpgradeLevel,
-        luckUpgradeLevel,
-        perks: window.perkDefinitions
-          .filter(perk => unlockedPerkIds.has(perk.id))
-          .map(perk => ({ name: perk.name })),
-        clickMultiplier: getClickMultiplier()
-      };
-      window.postBeezGameStats?.(window.beezGameStats);
-    }
-
-    function buyNextClickUpgrade() {
-      const nextRequiredLevel = clickUpgradeRequiredLevel(purchasedClickUpgrades + 1);
-      if (level < nextRequiredLevel) return;
-      purchasedClickUpgrades += 1;
-      savePlayerLevel();
-      publishBeezStats();
-    }
-
-    function buyPerkUpgrade(upgrade) {
-      if (upgrade !== 'speed' && upgrade !== 'luck') return;
-      const currentLevel = upgrade === 'speed' ? speedUpgradeLevel : luckUpgradeLevel;
-      if (level < (currentLevel + 1) * 1000) return;
-      if (upgrade === 'speed') {
-        speedUpgradeLevel += 1;
-        refreshActivePerksForSpeed();
-      } else {
-        luckUpgradeLevel += 1;
-        updateCpsUI();
-      }
-      savePlayerLevel();
-      publishBeezStats();
-    }
-
-    function resetAllUpgrades() {
-      purchasedClickUpgrades = 0;
-      speedUpgradeLevel = 0;
-      luckUpgradeLevel = 0;
-    }
-
-    function setPlayerLevel(nextLevel) {
-      if (isRebirthing) return;
-      level = Math.max(1, Math.floor(Number(nextLevel) || 1));
-      clicksNeeded = clicksForLevel(level);
-      clicksInLevel = 0;
-      updateXpUI();
-    }
-
-    function performRebirth() {
-      const requiredLevel = (rebirths + 1) * 10000;
-      if (isRebirthing || level < requiredLevel) return;
-      isRebirthing = true;
-      const startingLevel = level;
-      rebirths += 1;
-      rebirthHistory.push({
-        number: rebirths,
-        requirement: requiredLevel,
-        color: `hsl(${Math.floor(Math.random() * 360)} 92% 48%)`
-      });
-      [...activePerks.keys()].forEach(deactivatePerk);
-      box.classList.add('rebirthing', 'rebirth-white');
-      xpBarWrap.classList.add('rebirthing');
-
-      const duration = 950;
-      const startedAt = performance.now();
-      const countDown = now => {
-        const progress = Math.min(1, (now - startedAt) / duration);
-        level = Math.max(1, Math.round(startingLevel - (startingLevel - 1) * progress));
-        clicksNeeded = clicksForLevel(level);
-        clicksInLevel = 0;
-        updateXpUI();
-        if (progress < 1) requestAnimationFrame(countDown);
-        else {
-          level = 1;
-          clicksNeeded = clicksForLevel(level);
-          clicksInLevel = 0;
-          updateXpUI();
-          isRebirthing = false;
-        }
-      };
-      requestAnimationFrame(countDown);
-      setTimeout(() => {
-        box.classList.remove('rebirthing', 'rebirth-white');
-        xpBarWrap.classList.remove('rebirthing');
-      }, 6200);
     }
 
     function launchXpBurst() {
@@ -2120,10 +1641,21 @@
 
       const homeIsOpen = document.querySelector('.tab.active')?.dataset.tab === 'home';
       if (homeIsOpen && !reduceAnimations) {
-        xpLevelUpFlash.textContent = 'LEVEL UP!';
-        xpLevelUpFlash.classList.remove('show');
-        void xpLevelUpFlash.offsetWidth;
-        xpLevelUpFlash.classList.add('show');
+        box.classList.remove('turkey-level-flash');
+        void box.offsetWidth; // restart animation
+        box.classList.add('turkey-level-flash');
+        document.body.classList.remove('level-up-flash');
+        void document.body.offsetWidth; // restart animation
+        document.body.classList.add('level-up-flash');
+        levelUpBanner.textContent = 'LEVEL ' + level + ' UP!!!!!';
+        levelUpBanner.classList.remove('show');
+        void levelUpBanner.offsetWidth; // restart animation
+        levelUpBanner.classList.add('show');
+        launchXpBurst();
+
+        setTimeout(() => box.classList.remove('turkey-level-flash'), 1300);
+        setTimeout(() => document.body.classList.remove('level-up-flash'), 1750);
+        setTimeout(() => levelUpBanner.classList.remove('show'), 1750);
       }
     }
 
@@ -2153,12 +1685,10 @@
     }
 
     function addClicks(amount, shouldJump = true, perk = null) {
-      if (window.isOutOfEnergy()) return;
-      const clicks = Math.round(Number(amount) * (perk ? getLuckMultiplier() : 1) * 10) / 10;
+      const clicks = Math.trunc(amount);
       if (!clicks) return;
       if (clicks > 0) {
         clicksInLevel += clicks;
-        totalClicks += clicks;
         while (clicksInLevel >= clicksNeeded) {
           clicksInLevel -= clicksNeeded;
           levelUp();
@@ -2172,8 +1702,7 @@
     }
 
     function registerTurkeyClick() {
-      if (window.isOutOfEnergy()) return;
-      addClicks(getClickMultiplier());
+      addClicks(1);
       activePerks.forEach(perk => {
         if (perk.clickBonus) addClicks(perk.clickBonus, false, perk);
       });
@@ -2201,13 +1730,7 @@
       try {
         localStorage.setItem(STORAGE_KEYS.playerLevel, JSON.stringify({
           level,
-          clicksInLevel,
-          totalClicks,
-          purchasedClickUpgrades,
-          rebirths,
-          rebirthHistory,
-          speedUpgradeLevel,
-          luckUpgradeLevel
+          clicksInLevel
         }));
       } catch {
         // Progress still works for this session if browser storage is unavailable.
@@ -2235,7 +1758,6 @@
         detail: { ids: [...unlockedPerkIds] }
       }));
       saveUnlockedPerks();
-      publishBeezStats();
     }
 
     function unlockCurrentSeasonPerks() {
@@ -2289,7 +1811,7 @@
     }
 
     function activatePerk(perk) {
-      if (window.isOutOfEnergy() || activePerks.has(perk.id) || !unlockedPerkIds.has(perk.id)) return;
+      if (activePerks.has(perk.id) || !unlockedPerkIds.has(perk.id)) return;
       const element = document.createElement('button');
       element.type = 'button';
       element.className = 'active-perk ' + perk.id;
@@ -2307,19 +1829,19 @@
       (perk.id === 'flag' ? turkeyEffectLayer : box).appendChild(element);
 
       const active = { ...perk, element, timer: null };
-      if (perk.id === 'verity') active.timer = setInterval(() => addClicks(5, true, active), perkInterval(1000));
-      if (perk.id === 'connor') active.timer = setInterval(() => addClicks(10, true, active), perkInterval(1000));
+      if (perk.id === 'verity') active.timer = setInterval(() => addClicks(5, true, active), 1000);
+      if (perk.id === 'connor') active.timer = setInterval(() => addClicks(10, true, active), 1000);
       if (perk.id === 'gobble') {
-        active.timer = setInterval(() => addClicks(-10 + Math.floor(Math.random() * 61), true, active), perkInterval(2000));
+        active.timer = setInterval(() => addClicks(-10 + Math.floor(Math.random() * 61), true, active), 2000);
       }
       if (perk.id === 'pickaxe') active.timer = setInterval(() => {
         addClicks(5, true, active);
         if (Math.random() < 0.3) addClicks(50, false, active);
-      }, perkInterval(2000));
+      }, 2000);
       if (perk.id === 'albuqqi') {
         teleportAlbuqqi(active);
         active.moveTimer = setInterval(() => teleportAlbuqqi(active), 2200);
-        active.timer = setInterval(() => addClicks(65, true, active), perkInterval(9000));
+        active.timer = setInterval(() => addClicks(65, true, active), 9000);
       }
       if (perk.id === 'flag') active.clickBonus = 90;
       if (perk.id === 'ultimate') {
@@ -2327,9 +1849,9 @@
         showUltimateApparition(active);
         active.apparitionTimer = setInterval(() => showUltimateApparition(active), 4000);
       }
-      if (perk.id === 'demonte') active.timer = setInterval(() => addClicks(330, true, active), perkInterval(4000));
+      if (perk.id === 'demonte') active.timer = setInterval(() => addClicks(1, true, active), 4000);
       if (perk.id === 'diamond') {
-        active.timer = setInterval(() => addClicks(1000, true, active), perkInterval(1000));
+        active.timer = setInterval(() => addClicks(1000, true, active), 1000);
         showDiamondApparition(active);
         active.apparitionTimer = setInterval(() => showDiamondApparition(active), 4000);
       }
@@ -2348,77 +1870,10 @@
       notifyActivePerks();
     }
 
-    function perkInterval(baseMilliseconds) {
-      return Math.max(50, baseMilliseconds / getSpeedMultiplier());
-    }
-
-    function refreshActivePerksForSpeed() {
-      const activeIds = [...activePerks.keys()];
-      activeIds.forEach(deactivatePerk);
-      activeIds.forEach(id => {
-        const perk = perkDefinitions.find(candidate => candidate.id === id);
-        if (perk) activatePerk(perk);
-      });
-    }
-
-    function exportSaveFile() {
-      const save = {
-        version: 1,
-        savedAt: new Date().toISOString(),
-        player: { level, clicksInLevel, totalClicks, purchasedClickUpgrades, rebirths, rebirthHistory, speedUpgradeLevel, luckUpgradeLevel },
-        unlockedPerkIds: [...unlockedPerkIds],
-        activePerkIds: [...activePerks.keys()]
-      };
-      const url = URL.createObjectURL(new Blob([JSON.stringify(save, null, 2)], { type: 'application/json' }));
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'beez-save.json';
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    }
-
-    function importSaveFile(save) {
-      const player = save?.player;
-      if (!player || !Number.isFinite(Number(player.level))) return;
-      const knownIds = new Set(perkDefinitions.map(perk => perk.id));
-      const savedUnlocked = Array.isArray(save.unlockedPerkIds) ? save.unlockedPerkIds.filter(id => knownIds.has(id)) : [];
-      const savedActive = Array.isArray(save.activePerkIds) ? save.activePerkIds.filter(id => savedUnlocked.includes(id)) : [];
-      [...activePerks.keys()].forEach(deactivatePerk);
-      level = Math.max(1, Math.floor(Number(player.level)));
-      totalClicks = Math.max(0, Number(player.totalClicks) || 0);
-      purchasedClickUpgrades = Math.max(0, Math.floor(Number(player.purchasedClickUpgrades) || 0));
-      rebirths = Math.max(0, Math.floor(Number(player.rebirths) || 0));
-      rebirthHistory = Array.isArray(player.rebirthHistory) ? player.rebirthHistory.filter(rebirth => rebirth && Number.isFinite(Number(rebirth.requirement)) && typeof rebirth.color === 'string') : [];
-      rebirths = Math.max(rebirths, rebirthHistory.length);
-      speedUpgradeLevel = Math.max(0, Math.floor(Number(player.speedUpgradeLevel) || 0));
-      luckUpgradeLevel = Math.max(0, Math.floor(Number(player.luckUpgradeLevel) || 0));
-      clicksNeeded = clicksForLevel(level);
-      clicksInLevel = Math.max(0, Math.min(Number(player.clicksInLevel) || 0, clicksNeeded - 1));
-      unlockedPerkIds.clear();
-      savedUnlocked.forEach(id => unlockedPerkIds.add(id));
-      updateXpUI();
-      notifyUnlockedPerks();
-      savedActive.forEach(id => {
-        const perk = perkDefinitions.find(candidate => candidate.id === id);
-        if (perk) activatePerk(perk);
-      });
-    }
-
     window.addEventListener('perkactivate', event => activatePerk(event.detail));
     window.addEventListener('perkdeactivate', event => deactivatePerk(event.detail));
-    window.addEventListener('energychange', () => renderPerks());
-    window.addEventListener('message', event => {
-      if (event.data?.type === 'beez-buy-click-upgrade') buyNextClickUpgrade();
-      if (event.data?.type === 'beez-buy-perk-upgrade') buyPerkUpgrade(event.data.upgrade);
-      if (event.data?.type === 'beez-rebirth') performRebirth();
-      if (event.data?.type === 'beez-export-save') exportSaveFile();
-      if (event.data?.type === 'beez-import-save') importSaveFile(event.data.save);
-    });
 
     updateXpUI();
-    setInterval(updateCpsUI, 1000);
     notifyUnlockedPerks();
     if (Array.isArray(savedActivePerkIds)) {
       savedActivePerkIds.forEach(id => {
